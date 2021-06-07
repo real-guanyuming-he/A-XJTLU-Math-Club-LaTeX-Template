@@ -1,0 +1,5 @@
+Overall control:
+
+
+xjtlumathstyle.sty:
+A pkg that defines several useful commands intended for math mode usage and some improvments of existing math commands.
