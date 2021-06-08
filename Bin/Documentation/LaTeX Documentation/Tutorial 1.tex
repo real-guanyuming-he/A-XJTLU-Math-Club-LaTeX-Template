@@ -1,0 +1,308 @@
+\part{Tutorials}
+\pagenumbering{arabic}
+\section{Tutorial 1: Ashley's First Material}
+Ashley joined the material department recently. Now he is assigned to write a part of the material that covers basic calculus. He is very excited because this will be his first material as well as his first try on \LaTeX. First, he needs to know how to use \LaTeX{} and the package on his PC.
+
+\subsection{Installation and Configuration}
+To use \LaTeX{}, Ashley needs a \TeX{} distribution (and probably an editor) installed on his computer. There are several popular distributions listed on the \LaTeX{} official website: \url{https://www.latex-project.org/get/}. The installation and configuration of these distributions are quite easy and Ashley completed them in a few minutes.
+
+Then, Ashley wants to have an editor for writing \LaTeX{} documents. He learns that \TeX studio is a good one, so he downloads and installs it.
+
+What Ashley needs to do now is to obtain a copy of this package and install it. (TBD)
+
+\subsection{Basic Writings}
+Ashley, waiting breathlessly to begin his first work, clicks open the Templates folder and navigates into the material-book folder. He opens encapsulation.tex and notices that it is like this:
+\begin{lstlisting}
+... Some code ...
+
+\input{chapters.tex}
+
+... Some code ...
+\end{lstlisting}
+
+As the file name suggests, this is for making a material that -is to be published as a book. A book contains some chapters, and in the material writing, each chapter is a specific part of the material topic. For example, Ashley's work is part of the calculus material, so he needs to start a chapter for his work. He opens chapter.tex and finds a blank document. He then adds the following command to start his first chapter and runs \LaTeX{} on encapsulation.tex to check the output (On the left is the result of his command(s), appearing in a different font family, and on the right is his commands, with a gray background):
+
+\begin{miniexammar}{.45\textandmarginlen}{\fakesectioningdef{1}{Key points in calculus}}
+\begin{lstlisting}
+\chapter{Key points in calculus}
+\end{lstlisting}
+\end{miniexammar}
+\verb=\chapter{...}= is a \LaTeX{} \emph{command}, which starts with a \verb=\=%
+. The words being wrapped with the curly brackets \verb={}= form an \emph{argument} for the command. At this place, they are the caption of the chapter. Ashley notices that \LaTeX{} automatically enlarges the font and makes them bold. Being different with many other typesetting software, \LaTeX{} only needs the logical idea of what to do (e.g. there will be a chapter named xxx at some place), and it will control the appearance for the author.
+
+Ashley is satisfied with that result. He then types some of paragraphs. In \LaTeX{}, paragraphs are separated by one blank line.
+
+\begin{miniexammar}{.5\textandmarginlen}{
+\fakesectioningdef{1}{Key points in calculus}%
+What does Ashley write in these paragraphs? Well, in fact, I don't know. You may find him and ask him yourself.
+		
+\hspace{1.5em}But, wait a minute, how do I find Ashley when he doesn't really exist? Well, this is a good question.}
+\begin{lstlisting}
+\chapter{Key points in calculus}
+What does Ashley write in these paragraphs? Well, in fact, I don't know. You may find him and ask him yourself.
+		
+But, wait a minute, how do I find Ashley when he doesn't really exist? Well, this is a good question.
+\end{lstlisting}
+\end{miniexammar}
+Ashley notices that paragraphs are automatically indented by \LaTeX{}. Yet he also notices that the paragraph directly under the chapter is not indented.
+
+Apart from chapter, \LaTeX{} also provides these sectioning commands:
+\begin{itemize}
+\item section
+\item subsection
+\item subsubsection
+\item paragraph
+\item subparagraph
+\end{itemize}
+You may notice that paragraph is included here. In fact, the sectioning command \verb=\paragraph= generates a title for the paragraphs like other sectioning commands.
+
+When Ashley turns to the whole output, he sees that his chapter appears in the table of contents:
+
+\begin{miniexammar}{.7\textandmarginlen}{
+\faketoc
+\fakecontentsline{1}{\textbf{Key points in calculus}}{1}
+}
+\begin{lstlisting}
+\chapter{Key points in calculus}
+\end{lstlisting}
+\end{miniexammar}
+\LaTeX{} generates the table of contents for all sectioning commands\footnote{whose depth are below the table of contents (toc) depth. The actual process of how toc is generated is a bit complex, so I will not cover it here}. For this reason, Ashley has to run \LaTeX{} twice on encapsulation.tex for a correct table of contents.
+
+\subsection{Adjust fonts}
+So far, Ashley knows how to instruct \LaTeX{} to do some basic things. Although he feels full of energy and is writing at full speed, he soon encounters some problems. Ashley wants to emphasize some keywords such as ``limit''. He later learns that the command \verb=\emph= instructs \LaTeX{} to emphasize the text passed to it, as shown below.
+
+\begin{parexammar}{.38\textandmarginlen}{
+Calculus is the study of \emph{limits}.
+}
+\begin{lstlisting}
+Calculus is the study of \emph{limits}.
+\end{lstlisting}
+\end{parexammar}
+
+This thing is quite \LaTeX, as Ashley only tells \LaTeX{} to emphasize it, and has no control of how \LaTeX{} does it. Although most of times it is enough, Ashley wants more. He wonder how can one implicitly control the appearance of the texts, since \LaTeX{} cannot cover all needs in every situations. \LaTeX{} does provide certain default operations on fonts, and Ashley can use them to control the size, family, and style of his texts.
+
+\begin{parexammar}{.45\textandmarginlen}{
+Ashley can tell \LaTeX{} to adjust the font size like:
+{\tiny very very small} {\scriptsize the size of scripts} {\footnotesize the size of foot notes} {\small small font} {\normalsize just being normal} {\large a bit bigger} {\Large large text} {\LARGE very big} {\huge huge} {\Huge damn huge}
+}
+\begin{lstlisting}
+Ashley can tell \LaTeX{} to adjust the font size like:
+{\tiny very very small} {\scriptsize the size of scripts} {\footnotesize the size of foot notes} {\small small font} {\normalsize just being normal} {\large a bit bigger} {\Large large text} {\LARGE very big} {\huge huge} {\HUGE damn huge}
+\end{lstlisting}
+\end{parexammar}
+This time Ashley sees something different from the command \verb=\emph{}=. The texts here are inside curly brackets, and the commands are just given inside the brackets along with the texts. Something enclosed by a pair of curly brackets is said to be inside a \emph{group}. Commands called inside the group influence the whole group.
+
+Apart from the sizes, Ashley is also able to control the style and family of fonts. As shown in Table \ref{tab:stdfontcmds}, \LaTeX{} provides these commands to control font style and family:
+\begin{table}[htbp]
+\begin{tabular}{lll}
+Command & Used in a group & Action\\
+\hline
+\verb=\textrm{...}= & \verb={\rmfamily...}= & {Text in \textrm{Roman} family} \\
+\verb=\textsf{...}= & \verb={\sffamily...}= & {Text in \textsf{sans serif} family} \\
+\verb=\texttt{...}= & \verb={\ttfamily...}= & {Text in \texttt{typewriter} family} \vspace{.15cm}\\
+\verb=\textmd{...}= & \verb={\mdseries...}= & {Text in \textmd{medium} series} \\
+\verb=\textbf{...}= & \verb={\bfseries...}= & {Text in \textbf{bold} series} \vspace{.15cm}\\
+\verb=\textup{...}= & \verb={\upshape...}= & {Text in \textup{upright} shape} \\
+\verb=\textit{...}= & \verb={\itshape...}= & {Text in \textit{italic} shape} \\
+\verb=\textsl{...}= & \verb={\slshape...}= & {Text in \textsl{slanted} shape} \\
+\verb=\textsc{...}= & \verb={\scshape...}= & {Text in \textsc{small caps} shape} \vspace{.15cm}\\
+\verb=\emph{...}= & \verb={\em...}= & {Text \emph{emphasized}}\vspace{.15cm}\\
+\verb=\textnormal{...}= & \verb={\normalfont...}= & {Text in default font}
+\end{tabular}
+\caption{Standard font-changing commands and declarations}
+\label{tab:stdfontcmds}
+\end{table}
+
+Many of these commands provide both an used-in-group version and a normal version. Ashley can choose which version to use depend on his needs.
+
+Ashley also wants to learn how to change the color of fonts. He is surprised that this package documentation does not provide such a description. After contacting with the package author, he learns that this topic is not covered because the materials are printed in black and white, so it would be nearly useless to change colors.
+
+\subsection{Typing Mathematical Formulae}
+It comes the most exciting part of Ashley's work --- typing formulae! Even though he had little experience in \LaTeX{} before, he already learned that \LaTeX{} produces high-quality math formulae, as he previously saw at some sites like Math Stack Exchange (\url{https://math.stackexchange.com/}) and ZhiHu (\url{https://www.zhihu.com/}).
+
+Because of his previous experience on these sites, he knows a little bit about how to write formulae in \LaTeX{}.
+
+Generally, formulae in \LaTeX{} are classified into two types: \emph{inline} and \emph{displayed}. Formulae of the former type are enclosed in a pair of dollar sign: \verb=$...$=, while formulae of the latter type are enclosed in a pair of double dollar sign: \verb=$$...$$=. These delimiters are the original \TeX{} ones. \LaTeX{} provides additionally two pairs of delimiters for inline and displayed math, respectively: \verb=\(...\)= and \verb=\[...\]=. In fact, the \TeX{} shorthand \verb=$$...$$= for displayed math should be avoided, as it may lead to strange problems in \LaTeX{}.
+
+As their name suggest, an inline formula is in a line of texts, while a displayed formula is displayed outside of the main texts.
+
+\begin{miniexammar}{.55\textandmarginlen}%
+{
+The derivative of a function $f$ can be written as $f'$, or as
+\[
+\frdt{x}
+\]
+}
+\begin{lstlisting}
+The derivative of a function $f$ can be written as $f'$, or as
+\[
+\frdt{x}
+\]
+\end{lstlisting}
+\end{miniexammar}
+Here, Ashley uses a command provided by xjtlumath: \verb=\frdt=. This command takes two argument, where the first one is optional with the default value $f$. They represent the function and the variable, respectively. When Ashley wants to typeset the derivative of $g$ to $x$, he will write 
+\verb=\frdt[g]{x}=, which gives $\frdt[g]{x}$. The optional argument is passed to the command in the embrace of a pair of two square brackets. As careful as Ashley, you may notice that in inline mode, a formula is shrunk to some extent so that it can fit in one line.
+
+Ashley is quite satisfied with the rendering effect. He then writes some equations and texts. But when he wants to reference a equation, a problem arises. How does he address the equation he wants to reference? Here Ashley is introduced with another way of giving a displayed math: the equation environment.
+
+\begin{miniexammar}{.5\textandmarginlen}%
+{
+The fundamental theorem of calculus can be expressed in the form of Equation \ref{eq:fundthmcal}
+\begin{equation}
+\int_a^b f(x) \dx = F(b) - F(a) \label{eq:fundthmcal}
+\end{equation}
+}
+\begin{lstlisting}
+The fundamental theorem of calculus can be expressed in the form of Equation \ref{eq:fundthmcal}
+\begin{equation}
+\int_a^b f(x) \dx = F(b) - F(a) \label{eq:fundthmcal}
+\end{equation}
+\end{lstlisting}
+\end{miniexammar}
+
+Ashley understands the equation by his previous knowledge: the underscore (\verb=_=) introduces the subscript ($a$) to the integral symbol $\int$ (\verb=\int=), while the caret (\verb=^=) introduces the superscript ($b$) to it. The command \verb=\dx= is provided by xjtlumath. If Ashley types dx directly, the result will be like this $\int f(x) dx$, which is ugly. \verb=\dx= refines the result. Note that \verb=\dx= can only be used to represent the integral variable, because it adds a little space before it. If Ashley needs to use other variables, he needs to use the command \verb=\dd=. xjtlumath also provides the same facility for multiple integrals.
+
+\begin{miniexammar}{.6\textandmarginlen}%
+{
+\[
+\int f(t) \dd t,\quad
+\iint f(x,y) \dxdy,\quad
+\iiint f(x,y,z) \dxdydz
+\]
+\[
+\iint f \drdt,\quad
+\iiint f \dzdrdt,\quad
+\iiint f \drdtdp
+\]
+}
+\begin{lstlisting}
+\[
+\int f(t) \dd t,\quad
+\iint f(x,y) \dxdy,\quad
+\iiint f(x,y,z) \dxdydz
+\]
+\[
+\iint f \drdt,\quad
+\iiint f \dzdrdt,\quad
+\iiint f \drdtdp
+\]
+\end{lstlisting}
+\end{miniexammar}
+
+However, Ashley knows nothing about cross-referencing in \LaTeX{} as well as the equation environment. Let's explain them to Ashley. In \LaTeX{}, an environment is started by the \verb=\begin= command and ends at the \verb=\end= command. The name of the environment is passed to the pair of commands. The equation environment gives a displayed math equation that is \emph{counted}. The \verb=\label= command at the end of the equation catches the counter as well as some other information like its location and store it in the label represented by the name given to \verb=\label=. To use the label, Ashley needs the \verb=\ref= command, which prints the counter\footnote{and in addition generates a clickable hyperlink, which on click navigates to the location of the equation, and which is the effect of the hyperref package loaded by the template.}.
+
+The equation environment gives a numbered counted, while \verb=\[\]= doesn't. Using a label inside this causes the label to be directed to another counter, so use a label only when that thing is counted.
+
+\subsection{Space Management}
+The space management in \LaTeX{} is a bit more complex than just typing white spaces. Ashley is a careful person, he soon finds that the space after a sentence is a little bit larger than the space between words (you may zoom in the .pdf file to see this). \LaTeX{} decides a space as a space at the end of a sentence if
+\begin{enumerate}
+\item A full stop (.) or right quotation mark (') is immediately followed by the space, and
+\item if it is a full stop being followed, the letter immediately before the full stop is in lowercase.
+\end{enumerate}
+Most sentences end according to the above rules, though there are some exceptions. For example, \LaTeX{} may take a Mr.~as the sign of a sentence ending, and thus produces wrong spacing. Under such circumstances, Ashley needs to configure \LaTeX{} manually by \verb=~= and \verb=\@=.
+
+\begin{parexammar}{.5\textandmarginlen}%
+{
+In another world, Mr.~Ashley was once loved by Miss Scarlett. In this world, Mr.~Ashley has a PC\@. He loves programming on his PC.
+}
+\begin{lstlisting}
+In another world, Mr.~Ashley was once loved by Miss Scarlett. In this world, Mr.~Ashley has a PC\@. He loves programming on his PC.
+\end{lstlisting}
+\end{parexammar}
+Ashley is happy as he learned how to manage the spaces. Yet soon he finds another problem.
+
+\begin{parexammar}{.5\textandmarginlen}%
+{
+Some commands like \LaTeX seems to eat the space after it.
+}
+\begin{lstlisting}
+Some commands like \LaTeX seems to eat the space after it.
+\end{lstlisting}
+\end{parexammar}
+To solve this problem, Ashley needs to add an empty group (\verb={}=) at the end of the command.
+
+As for mathematical formulae, things become different. \LaTeX{} ignores all white spaces in math mode, whether it is inline or displayed. To add extra spaces, Ashley has to use the commands shown in Table \ref{tab:spacemath}.
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ll}
+Command & Effect (approximately) \\
+\hline
+\verb=\,= & $\frac{3}{18}$ quad (\showwidth{.166666em}) \vspace{5pt}\\
+\verb=\:= & $\frac{4}{18}$ quad (\showwidth{.222222em}) \vspace{5pt}\\
+\verb=\;= & $\frac{5}{18}$ quad (\showwidth{.277777em}) \vspace{5pt}\\
+\verb=\ = (\verb=\= followed by a space) & a space \vspace{5pt}\\
+\verb=\quad= & Width of `M' in current font (\showwidth{1em}) \vspace{5pt}\\
+\verb=\qquad= & 2 quad (\showwidth{2em})
+\end{tabular}
+\end{center}
+\caption{Spacing in Math Mode}
+\label{tab:spacemath}
+\end{table}
+
+\subsection{Lists and Other Environments}
+Now Ashley has learned about dealing with texts, he continues his writing. Soon he has to break again as he is working on a list. At first, he hard-codes the list like this:
+
+\begin{parexammar}{.4\textandmarginlen}{
+1. Something
+
+2. Something
+
+3. Something
+}
+\begin{lstlisting}
+1. Something
+
+2. Something
+
+3. Something
+\end{lstlisting}
+\end{parexammar}
+Yet this solution looks rather silly. In addition, if Ashley wants to change the number, he needs to do it manually. He wonders if \LaTeX{} has some more convenient way to do it.
+
+Fortunately there is. \LaTeX{} provides several environment to deal with lists. One example is shown below.
+
+\begin{miniexammar}{.4\textandmarginlen}{
+\begin{enumerate}
+\item Something
+\item Something
+\item Something
+\end{enumerate}
+}
+\begin{lstlisting}
+\begin{enumerate}
+\item Something
+\item Something
+\item Something
+\end{enumerate}
+\end{lstlisting}
+\end{miniexammar}
+
+Now Ashley has nearly everything he needs to know. He is content with what he has written and feels happy. The only thing that matters for him is that he wants to show theorems, definitions, and other things in a more fancy fashion so that his readers can focus on these.
+
+xjtlumath provides some fancy environments just for this purpose.
+
+\begin{miniexammar}{.6\textandmarginlen}{
+\begin{definition}[Absolute Convergence]
+An infinite series $\infseries{n}{0}$ is said to be absolutely convergent iff
+\[
+\sum_{n=0}^\infty |a_n|
+\]
+converges
+\end{definition}
+}
+\begin{lstlisting}
+\begin{definition}[Absolute Convergence]
+An infinite series $\infseries{n}{0}$ is said to be absolutely convergent iff
+\[
+\sum_{n=0}^\infty |a_n|
+\]
+converges
+\end{definition}
+\end{lstlisting}
+\end{miniexammar}
+
+Besides of definition, Ashley is also able to use theorem, proposition, corollary, lemma, axiom, and example. These environments own their individual counters, and Ashley can simply use label to reference them.
+
+I didn't replace the environment for the original proof environment, as proofs are often much longer than these.
+
+These facilities greatly help Ashley in his material preparation, and he will finish his work soon...

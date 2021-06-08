@@ -1,6 +1,8 @@
-\documentclass[oneside]{book}
+\documentclass{article}
 
 \usepackage{mydoc}
+\usepackage{xjtlumathstyle}
+\usepackage{xjtlumaththm}
 
 \usepackage{listings}
 \usepackage{xcolor}
@@ -21,106 +23,23 @@ breakindent=0pt% disable indention for line breaks
 \author{Guanyuming He}
 \date{\today}
 
-\newcommand{\mycprt}{Copyright \copyright Guanyuming He 2021-2021}
+\newcommand{\mycprt}{Copyright \copyright{} Guanyuming He 2021-\the\year.}
 
 \begin{document}
 \pagenumbering{gobble}
 \maketitle
 
+\vfill
+\section*{Copyright}
+\mycprt{} The document is licensed under the MIT license.
+
 \cleardoublepage
 \pagenumbering{roman}
 \tableofcontents
-	
-\clearpage
-\pagestyle{headings}
-\chapter{General Information}
-\section{What is this package?}
-This \LaTeX{} package was originally intended to be used for the materials dept.~of XJTLU math club. Yet I found that my university lack \LaTeX{} templates for students, therefore I decided to extend it into a template for all users.
 
-The package contains several useful commands and environments for mathematical documents, and redefines some existing styles so that they suit the university's style.
+\include{General Information}
 
-\section{History}
-At the year 2020, I joined the materials dept.~of XJTLU math club. This department makes materials about math and distribute them to students to help them. At that time, the materials were being prepared with Microsoft Word and MathType. I saw that it was a good opportunity to enhance the materials with the power of \LaTeX, so I proposed to prepare the documents using \LaTeX.
-
-The proposition was passed and our team started to transfer our working environment. During this process, I wrote a tiny package, a predecessor of this package, which was used in our works. Many people in our department knew nearly nothing about \LaTeX, and as I promised that the new preparation process would not be very hard, I managed to define the overall procedure, shared some necessary knowledge about \LaTeX, and taught them how to use the package.
-
-I admit that I was a bit irresponsible at that time. Truly I described how the working procedure was and how should my package be used, but I shared few about \LaTeX. My package and workflow simplified some concepts so that the team didn't need to care about some parts of \LaTeX{} such as the documentclass and preamble, though \LaTeX{} itself is still a lot different from Word. I underestimated the difficulty for my colleagues to learn basic \LaTeX{} typing skills so it was a torment for some of them. I some kind of realized this problem in the later stages, but I was occupied by my own businesses, and didn't pay enough attention to it.
-
-The final results were generally successful and mostly good enough. Yet I feel sorry for my colleagues because this thing was in fact not that easy for them. In addition, I recently took part in the 15\textsubscript{th} anniversary of XJTLU math club and this somehow strengthened my sense of belonging to the math club. For these reasons, I decided to leave something for XJTLU's students in the future. I rewrote the whole package and added a series of tutorials that covers the basics of \LaTeX{} as well as making materials, so that people in the material dept.~will do much less to make a material in \LaTeX. The tutorials are in the form of a stories, since I think this method adds more fun to the studying.
-
-Apart from that, the general students of XJTLU or even other \LaTeX{} users may find this package and documentation useful. So its final form was decided to be a template with documentation that is published as a GitHub repository under my personal account. This is because the math club it self doesn't have a GitHub account currently. I will transfer this repository to its official account once it has established one.
-
-\chapter{Tutorials}
-\pagenumbering{arabic}
-\section{Tutorial: Ashley's First Material}
-Ashley joined the material department recently. Now he is assigned to write a part of the material that covers basic calculus. He is very excited because this will be his first material as well as his first try on \LaTeX. First, he needs to know how to use \LaTeX{} and the package on his PC.
-
-\subsection{Installation and Configuration}
-To use \LaTeX{}, Ashley needs a \TeX{} distribution (and probably an editor) installed on his computer. There are several popular distributions listed on the \LaTeX{} official website: \url{https://www.latex-project.org/get/}. The installation and configuration of these distributions are quite easy and Ashley completed them in a few minutes.
-
-Then, Ashley wants to have an editor for writing \LaTeX{} documents. He learns that \TeX studio is a good one, so he downloads and installs it.
-
-What Ashley needs to do now is to obtain a copy of this package and install it. (TBD)
-
-\subsection{Basic Writings}
-Ashley, waiting breathlessly to begin his first work, clicks open the Templates folder and navigates into the material-book folder. He opens encapsulation.tex and notices that it is like this:
-\begin{lstlisting}
-... Some code ...
-
-\input{chapters.tex}
-
-... Some code ...
-\end{lstlisting}
-
-As the file name suggests, this is for making a material that -is to be published as a book. A book contains some chapters, and in the material writing, each chapter is a specific part of the material topic. For example, Ashley's work is part of the calculus material, so he needs to start a chapter for his work. He opens chapter.tex and finds a blank document. He then adds the following command to start his first chapter and runs \LaTeX{} on encapsulation.tex to check the output (On the left is the result of his command(s), and on the right is his commands):
-
-\begin{miniexammar}{.45\textandmarginlen}{\minichapter{Key points in calculus}\postminisectioning{chapter}}
-\begin{lstlisting}
-\chapter{Key points in calculus}
-\end{lstlisting}
-\end{miniexammar}
-\verb=\chapter{...}= is a \LaTeX{} \emph{command}, which starts with a \verb=\=%
-. The words being wrapped with the brackets \verb={}= form an \emph{argument} for the command. At this place, they are the caption of the chapter. Ashley notices that \LaTeX{} automatically enlarges the font and makes them bold. Being different with many other typesetting software, \LaTeX{} only needs the logical idea of what to do (e.g. there will be a chapter named xxx at some place), and it will control the appearance for the author.
-
-Ashley is satisfied with that result. He then types some of paragraphs. In \LaTeX{}, paragraphs are separated by one blank line.
-\begin{miniexammar}{.5\textandmarginlen}{
-\minichapter{Key points in calculus}\postminisectioning{chapter}
-What does Ashley write in these paragraphs? Well, in fact, I don't know. You may find him and ask him yourself.
-		
-\hspace{1.5em}But, wait a minute, how do I find Ashley when he doesn't really exist? Well, this is a good question.}
-\begin{lstlisting}
-\chapter{Key points in calculus}
-What does Ashley write in these paragraphs? Well, in fact, I don't know. You may find him and ask him yourself.
-		
-But, wait a minute, how do I find Ashley when he doesn't really exist? Well, this is a good question.
-\end{lstlisting}
-\end{miniexammar}
-Ashley notices that paragraphs are automatically indented by \LaTeX{}. Yet he also notices that the paragraph directly under the chapter is not indented.
-
-Apart from chapter, \LaTeX also provides these sectioning commands:
-\begin{itemize}
-\item section
-\item subsection
-\item subsubsection
-\item paragraph
-\item subparagraph
-\end{itemize}
-
-You may notice that paragraph is included here. In fact, the command \verb!\paragraph{}! generates a title for the paragraphs like other sectioning commands.
-
-When Ashley turns to the whole output, he sees that his chapter appears in the table of contents:
-\begin{miniexammar}{.7\textandmarginlen}{
-\faketoc
-\fakecontentsline{1}{\textbf{Key points in calculus}}{1}
-}
-\begin{lstlisting}
-\chapter{Key points in calculus}
-\end{lstlisting}
-\end{miniexammar}
-
-\LaTeX generates the table of contents for all sectioning commands\footnote{whose depth are below the table of contents (toc) depth. The actual process of how toc is generated is a bit complex, so I will not cover it here}. For this reason, Ashley has to run \LaTeX{} twice on encapsulation.tex for a correct table of contents.
-
-\subsection{Adjust fonts}
-
+%\part{Tutorials} inside Tutorial 1
+\include{Tutorial 1} 
 
 \end{document}
