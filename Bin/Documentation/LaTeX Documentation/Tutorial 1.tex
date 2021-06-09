@@ -1,7 +1,7 @@
 \part{Tutorials}
 \pagenumbering{arabic}
 \section{Tutorial 1: Ashley's First Material}
-Ashley joined the material department recently. Now he is assigned to write a part of the material that covers basic calculus. He is very excited because this will be his first material as well as his first try on \LaTeX. First, he needs to know how to use \LaTeX{} and the package on his PC.
+Ashley joined the material department recently. Now he is assigned to write a part of the material that covers basic calculus. He is very excited because this will be his first material as well as his first try on \LaTeX. First, he needs to know how to use \LaTeX{} and the package on his PC. In this tutorial, we will follow Ashley and see what he learns in the material preparation.
 
 \subsection{Installation and Configuration}
 To use \LaTeX{}, Ashley needs a \TeX{} distribution (and probably an editor) installed on his computer. There are several popular distributions listed on the \LaTeX{} official website: \url{https://www.latex-project.org/get/}. The installation and configuration of these distributions are quite easy and Ashley completed them in a few minutes.
@@ -67,6 +67,16 @@ When Ashley turns to the whole output, he sees that his chapter appears in the t
 \end{lstlisting}
 \end{miniexammar}
 \LaTeX{} generates the table of contents for all sectioning commands\footnote{whose depth are below the table of contents (toc) depth. The actual process of how toc is generated is a bit complex, so I will not cover it here}. For this reason, Ashley has to run \LaTeX{} twice on encapsulation.tex for a correct table of contents.
+
+When Ashley once writes a very long caption for a section, the table of contents become quite ugly. To solve this, Ashley can specify a short form of the section that is used in the table of contents, as shown below:
+\begin{miniexammar}{.7\textandmarginlen}{
+\faketoc
+\fakecontentsline{1}{\textbf{A Short Name}}{1}
+}
+\begin{lstlisting}
+\chapter[A Short Name]{A very very long Caption}
+\end{lstlisting}
+\end{miniexammar}
 
 \subsection{Adjust fonts}
 So far, Ashley knows how to instruct \LaTeX{} to do some basic things. Although he feels full of energy and is writing at full speed, he soon encounters some problems. Ashley wants to emphasize some keywords such as ``limit''. He later learns that the command \verb=\emph= instructs \LaTeX{} to emphasize the text passed to it, as shown below.
