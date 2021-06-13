@@ -78,7 +78,7 @@ When Ashley once writes a very long caption for a section, the table of contents
 \end{lstlisting}
 \end{miniexammar}
 
-\subsection{Adjust fonts}
+\subsection{Adjust fonts} \label{subsec:fonts}
 So far, Ashley knows how to instruct \LaTeX{} to do some basic things. Although he feels full of energy and is writing at full speed, he soon encounters some problems. Ashley wants to emphasize some keywords such as ``limit''. He later learns that the command \verb=\emph= instructs \LaTeX{} to emphasize the text passed to it, as shown below.
 
 \begin{parexammar}{.38\textandmarginlen}{
@@ -89,7 +89,7 @@ Calculus is the study of \emph{limits}.
 \end{lstlisting}
 \end{parexammar}
 
-This thing is quite \LaTeX, as Ashley only tells \LaTeX{} to emphasize it, and has no control of how \LaTeX{} does it. Although most of times it is enough, Ashley wants more. He wonder how can one implicitly control the appearance of the texts, since \LaTeX{} cannot cover all needs in every situations. \LaTeX{} does provide certain default operations on fonts, and Ashley can use them to control the size, family, and style of his texts.
+This thing is quite \LaTeX, as Ashley only tells \LaTeX{} to emphasize it, and has no control of how \LaTeX{} does it. Although most of times it is enough, Ashley wants more. He wonder how can one explicitly control the appearance of the texts, since \LaTeX{} cannot cover all needs in every situations. \LaTeX{} does provide certain default operations on fonts, and Ashley can use them to control the size, family, and style of his texts.
 
 \begin{parexammar}{.45\textandmarginlen}{
 Ashley can tell \LaTeX{} to adjust the font size like:
@@ -311,8 +311,66 @@ converges
 \end{lstlisting}
 \end{miniexammar}
 
-Besides of definition, Ashley is also able to use theorem, proposition, corollary, lemma, axiom, and example. These environments own their individual counters, and Ashley can simply use label to reference them.
+xjtlumath loads amsthm, which gives the proof environment. When Ashley uses this environment to write proofs, he finds that a q.e.d.~sign appears at the end of the environment.
+\begin{miniexammar}{.5\textandmarginlen}{
+Now we prove the mean value theorem for definite integrals. That is, for a continuous function $f$ that is bounded on $[a,b]$, the definite integral $\int_a^b f(x) \dx = f(c)(b-a)$, where $c \in [a,b]$. 
+\begin{proof}
+Let $m,M$ be the infimum and supermum of $f([a,b])$, respectively.
+Therefore, $m\le f \le M$, and
+\[
+\int_a^b m \dx \le \int_a^b f(x) \dx \le \int_a^b M \dx
+\]
+, which gives
+\begin{align}
+m(b-a) \le &\int_a^b f(x) \dx \le M(b-a) \nonumber\\
+m \le &\frac{\int_a^b f(x) \dx}{b-a} \le M \label{eq:meanvalint}
+\end{align}
 
-I didn't replace the environment for the original proof environment, as proofs are often much longer than these.
+Since that $f$ is continuous, it can reach every value between the infimum and supermum of its range. That is, $\exists c \in [a,b], f(c) = \int_a^b f(x) \dx$. Substitute $f(c)$ back to equation \ref{eq:meanvalint} gives what the theorem states.
+\end{proof}
+}
+\begin{lstlisting}[basicstyle=\footnotesize]
+Now we prove the mean value theorem for definite integrals. That is, for a continuous function $f$ that is bounded on $[a,b]$, the definite integral $\int_a^b f(x) \dx = f(c)(b-a)$, where $c \in [a,b]$. 
+\begin{proof}
+Let $m,M$ be the infimum and supermum of $f([a,b])$, respectively.
+Therefore, $m\le f \le M$, and
+\[
+\int_a^b m \dx \le \int_a^b f(x) \dx \le \int_a^b M \dx
+\]
+, which gives
+\begin{align}
+m(b-a) \le &\int_a^b f(x) \dx \le M(b-a) \nonumber\\
+m \le &\frac{\int_a^b f(x) \dx}{b-a} \le M \label{eq:meanvalint}
+\end{align}
+
+Since that $f$ is continuous, it can reach every value between the infimum and supermum of its range. That is, $\exists c \in [a,b], f(c) = \int_a^b f(x) \dx$. Substitute $f(c)$ back to equation \ref{eq:meanvalint} gives what the theorem states.
+\end{proof}
+\end{lstlisting}
+\end{miniexammar}
+
+Ashley is able to control where the q.e.d.~sign appears by using the \verb=\qedhere= command provided by proof. If this command is given before, then it will not appear at the end.
+\begin{miniexammar}{.5\textandmarginlen}{
+\begin{proof}
+Some words...
+\[
+a+b=c \qedhere
+\]
+Som words...
+\end{proof}
+}
+\begin{lstlisting}
+\begin{proof}
+Some words...
+\[
+a+b=c \qedhere
+\]
+Som words...
+\end{proof}
+\end{lstlisting}
+\end{miniexammar}
+
+Besides of definition and proof, Ashley is also able to use theorem, proposition, corollary, lemma, axiom, and example. Except for proof, these environments own their individual counters, and Ashley can simply use label to reference them.
+
+However, one colleague of Ashley, Chao, complains that the English caption of these environments conflicts with the Chinese material he is writing. For this purpose, xjtlumath additionally provides Chinese version environments in replace of them in Chinese materials. Appending a `c' to the environments' names gives the names of the Chinese version environments.
 
 These facilities greatly help Ashley in his material preparation, and he will finish his work soon...

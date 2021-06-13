@@ -1,4 +1,5 @@
-\documentclass{article}
+\documentclass[UTF8]{ctexart}
+\usepackage{ctex}
 
 \usepackage{mydoc}
 \usepackage{xjtlumathstyle}
@@ -19,19 +20,18 @@ breakindent=0pt% disable indention for line breaks
 \usepackage{hyperref}
 \hypersetup{colorlinks=true}
 
-\title{Documentation For Package xjtlumath}
-\author{Guanyuming He}
+\title{宏包 xjtlumath 文档}
+\author{贺官羽铭}
 \date{\today}
 
 \newcommand{\mycprt}{Copyright \copyright{} Guanyuming He 2021-\the\year.}
-
 \begin{document}
 \pagenumbering{gobble}
 \maketitle
 
 \vfill
 \section*{Copyright}
-\noindent\mycprt{} The document is licensed under the MIT license.
+\mycprt{} The document is licensed under the MIT license.
 
 \clearpage
 \pagenumbering{roman}
@@ -45,5 +45,4 @@ breakindent=0pt% disable indention for line breaks
 \include{Tutorial 2}
 
 \include{Tutorial 3}
-
 \end{document}

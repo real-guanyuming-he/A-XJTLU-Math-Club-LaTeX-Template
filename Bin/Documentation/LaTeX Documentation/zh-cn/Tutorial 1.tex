@@ -1,0 +1,375 @@
+\part{教程}
+\pagenumbering{arabic}
+\section{教程 1: Ashley的第一份资料}
+Ashley 最近加入了资料部门。 现在他被指派写一部分涵盖基本微积分的资料。 他非常兴奋，因为这将是他的第一个资料，也是他对 \LaTeX 的第一次尝试。 首先，他需要知道如何在他的 PC 上使用 \LaTeX{} 和别的宏包。 在本教程中，我们将跟随 Ashley，看看他在资料准备中学到了什么。
+
+\subsection{安装和配置}
+要使用 \LaTeX{}，Ashley 需要在他的计算机上安装一个 \TeX{} 发行版（可能还有一个编辑器）。 \LaTeX{} 官方网站上列出了几种流行的发行版：\url{https://www.latex-project.org/get/}。 这些发行版的安装和配置非常简单，Ashley 在几分钟内完成了它们。
+
+然后，Ashley 想要一个编辑器来编写 \LaTeX{} 文档。 他了解到 \TeX studio 是一个很好的工作室，所以他下载并安装了它。
+
+Ashley 现在需要做的是获取该宏包的副本并安装它。 (TBD)
+
+\subsection{基本书写}
+Ashley，迫不及待地等待开始他的第一项工作，单击打开 Templates 文件夹并导航到 material-book 文件夹。 他打开encapsulation.tex，发现它是这样的：
+\begin{lstlisting}
+... Some code ...
+
+\input{chapters.tex}
+
+... Some code ...
+\end{lstlisting}
+
+正如文件名所暗示的，这是用于制作将作为书籍出版的资料。 一本书包含一些章节，在资料写作中，每一章都是资料主题的一个特定部分。 例如，Ashley 的工作是微积分资料的一部分，因此他需要为他的工作开始一章。 他打开chapter.tex 并发现它是一个空白文档。 然后他添加以下命令开始他的第一章并在 encapsulation.tex 上运行 \LaTeX{} 以检查输出（左侧是他的命令的结果，出现在不同的字体系列中，右侧是 是他的命令，背景为灰色）：
+
+\begin{miniexammar}{.45\textandmarginlen}{\fakesectioningdef{1}{Key points in calculus}}
+\begin{lstlisting}
+\chapter{Key points in calculus}
+\end{lstlisting}
+\end{miniexammar}
+\verb=\chapter{...}= 是一个 \LaTeX{} \emph{command}，它以 \verb=\=% 开头
+. 用大括号 \verb={}= 包裹的单词形成命令的 \emph{参数}。 在这个地方，参数是章节的标题。 Ashley 注意到 \LaTeX{} 会自动放大标题字体并使它们加粗。 与许多其他排版软件不同的是，用\LaTeX{} 只需要知道要做什么的逻辑思路（例如在某个地方会有一个名为 xxx 的章节），它会为作者控制外观。
+
+Ashley对这个结果很满意。 然后他键入一些段落。 在 \LaTeX{} 中，段落由一个空行分隔。
+
+\begin{miniexammar}{.5\textandmarginlen}{
+\fakesectioningdef{1}{Key points in calculus}%
+What does Ashley write in these paragraphs? Well, in fact, I don't know. You may find him and ask him yourself.
+		
+\hspace{1.5em}But, wait a minute, how do I find Ashley when he doesn't really exist? Well, this is a good question.}
+\begin{lstlisting}
+\chapter{Key points in calculus}
+What does Ashley write in these paragraphs? Well, in fact, I don't know. You may find him and ask him yourself.
+		
+But, wait a minute, how do I find Ashley when he doesn't really exist? Well, this is a good question.
+\end{lstlisting}
+\end{miniexammar}
+Ashley 注意到段落由 \LaTeX{} 自动缩进。 然而，他也注意到该章正下方的段落没有缩进(在中文环境中有所不同)。
+
+除了章节之外，\LaTeX{} 还提供了以下分节命令：
+\begin{itemize}
+\item section
+\item subsection
+\item subsubsection
+\item paragraph
+\item subparagraph
+\end{itemize}
+您可能会注意到此处包含该paragraph。 事实上，分节命令 \verb=\paragraph= 像其他分节命令一样为段落生成标题。
+
+当 Ashley 转向整个输出时，他看到他的章节出现在目录中：
+
+\begin{miniexammar}{.7\textandmarginlen}{
+\faketoc
+\fakecontentsline{1}{\textbf{Key points in calculus}}{1}
+}
+\begin{lstlisting}
+\chapter{Key points in calculus}
+\end{lstlisting}
+\end{miniexammar}
+\LaTeX{} 为所有分节命令生成目录\footnote{其深度低于目录 (toc) 深度。 toc的实际生成过程有点复杂，这里就不赘述了}。 出于这个原因，Ashley 必须在 encapsulation.tex 上运行 \LaTeX{} 两次以获得正确的目录。
+
+当 Ashley 为某个部分写了很长的标题时，目录变得非常难看。 为了解决这个问题，Ashley 可以指定目录中使用的节的标题的简短形式，如下所示：
+\begin{miniexammar}{.7\textandmarginlen}{
+\faketoc
+\fakecontentsline{1}{\textbf{A Short Name}}{1}
+}
+\begin{lstlisting}
+\chapter[A Short Name]{A very very long Caption}
+\end{lstlisting}
+\end{miniexammar}
+
+\subsection{调整字体} \label{subsec:fonts}
+到目前为止，Ashley 知道如何指示 \LaTeX{} 做一些基本的事情。 虽然他感觉精力充沛，正在全速写作，但很快就遇到了一些问题。 Ashley 想强调一些关键字，例如“limit”。 他后来了解到命令 \verb=\emph= 指示 \LaTeX{} 强调传递给它的文本，如下所示。
+
+\begin{parexammar}{.38\textandmarginlen}{
+Calculus is the study of \emph{limits}.
+}
+\begin{lstlisting}
+Calculus is the study of \emph{limits}.
+\end{lstlisting}
+\end{parexammar}
+
+这东西挺\LaTeX，因为Ashley 只告诉\LaTeX{} 强调它，而无法控制\LaTeX{} 如何做到这一点。 虽然大多数时候这就足够了，但Ashley想要更多。 他想知道如何明确控制文本的外观，因为 \LaTeX{} 无法满足所有情况下的所有需求。 \LaTeX{} 确实提供了对字体的某些默认操作，Ashley 可以使用它们来控制文本的大小、系列和样式。
+\begin{parexammar}{.45\textandmarginlen}{
+Ashley can tell \LaTeX{} to adjust the font size like:
+{\tiny very very small} {\scriptsize the size of scripts} {\footnotesize the size of foot notes} {\small small font} {\normalsize just being normal} {\large a bit bigger} {\Large large text} {\LARGE very big} {\huge huge} {\Huge damn huge}
+}
+\begin{lstlisting}
+Ashley can tell \LaTeX{} to adjust the font size like:
+{\tiny very very small} {\scriptsize the size of scripts} {\footnotesize the size of foot notes} {\small small font} {\normalsize just being normal} {\large a bit bigger} {\Large large text} {\LARGE very big} {\huge huge} {\HUGE damn huge}
+\end{lstlisting}
+\end{parexammar}
+这一次 Ashley 看到了与命令 \verb=\emph{}= 不同的东西。 此处的文本在大括号内，命令与文本一起在括号内给出。 被一对大括号括起来的东西被称为在 \emph{组} 内。 在组内调用的命令会影响整个组。
+
+除了大小，Ashley 还能够控制字体的样式和系列。 如表 \ref{tab:stdfontcmds} 所示，\LaTeX{} 提供了以下命令来控制字体样式和系列：
+\begin{table}[htbp]
+\begin{tabular}{lll}
+Command & Used in a group & Action\\
+\hline
+\verb=\textrm{...}= & \verb={\rmfamily...}= & {Text in \textrm{Roman} family} \\
+\verb=\textsf{...}= & \verb={\sffamily...}= & {Text in \textsf{sans serif} family} \\
+\verb=\texttt{...}= & \verb={\ttfamily...}= & {Text in \texttt{typewriter} family} \vspace{.15cm}\\
+\verb=\textmd{...}= & \verb={\mdseries...}= & {Text in \textmd{medium} series} \\
+\verb=\textbf{...}= & \verb={\bfseries...}= & {Text in \textbf{bold} series} \vspace{.15cm}\\
+\verb=\textup{...}= & \verb={\upshape...}= & {Text in \textup{upright} shape} \\
+\verb=\textit{...}= & \verb={\itshape...}= & {Text in \textit{italic} shape} \\
+\verb=\textsl{...}= & \verb={\slshape...}= & {Text in \textsl{slanted} shape} \\
+\verb=\textsc{...}= & \verb={\scshape...}= & {Text in \textsc{small caps} shape} \vspace{.15cm}\\
+\verb=\emph{...}= & \verb={\em...}= & {Text \emph{emphasized}}\vspace{.15cm}\\
+\verb=\textnormal{...}= & \verb={\normalfont...}= & {Text in default font}
+\end{tabular}
+\caption{标准字体更改命令和声明}
+\label{tab:stdfontcmds}
+\end{table}
+
+这些命令中的许多命令都提供了组内使用版本和普通版本。 Ashley 可以根据自己的需要选择使用哪个版本。
+
+Ashley 还想学习如何更改字体颜色。 他很惊讶这个包文档没有提供这样的描述。 与包作者联系后得知，由于资料是黑白打印的，所以没有涉及这个主题，因此更改颜色几乎没有用。
+
+\subsection{键入数学公式}
+这是 Ashley 工作中最激动人心的部分 --- 输入公式！尽管他之前在 \LaTeX{} 方面的经验很少，但他已经了解到 \LaTeX{} 可以生成高质量的数学公式，正如他之前在 Math Stack Exchange (\url{https://math.stackexchange .com/}）和知乎（\url{https://www.zhihu.com/}）。
+
+由于他之前在这些网站上的经验，他对如何在 \LaTeX{} 中编写公式有所了解。
+
+通常，\LaTeX{} 中的公式分为两种类型：\emph{inline} 和\emph{displayed}。前一种类型的公式被一对美元符号包围：\verb=$...$=，而后一种类型的公式被一对双美元符号包围：\verb=$$...$$ =。这些分隔符是原始的 \TeX{} 分隔符。 \LaTeX{} 分别为内联和显示数学提供了两对分隔符：\verb=\(...\)= 和 \verb=\[...\]=。事实上，应该避免使用 \TeX{} 简写 \verb=$$...$$= 来显示数学，因为它可能会导致 \LaTeX{} 中出现奇怪的问题。
+
+顾名思义，inline公式位于一行文本中，而displayed公式则显示在正文之外。
+
+\begin{miniexammar}{.55\textandmarginlen}%
+{
+The derivative of a function $f$ can be written as $f'$, or as
+\[
+\frdt{x}
+\]
+}
+\begin{lstlisting}
+The derivative of a function $f$ can be written as $f'$, or as
+\[
+\frdt{x}
+\]
+\end{lstlisting}
+\end{miniexammar}
+在这里，Ashley 使用了 xjtlumath 提供的命令：\verb=\frdt=。 此命令有两个参数，其中第一个参数是可选的，默认值为 $f$。 它们分别代表函数和变量。 当Ashley想要将$g$对$x$的导数排版时，他会写
+\verb=\frdt[g]{x}=，给出 $\frdt[g]{x}$。 可选参数被包含在两个方括号内传递给命令。 像 Ashley 一样小心，您可能会注意到，在 inline 模式下，公式会在一定程度上缩小，以便它可以放在一行中。
+
+Ashley对渲染效果相当满意。 然后他写了一些方程式和文本。 但是当他想引用一个方程时，问题就出现了。 他如何处理他想要引用的等式？ 在这里，Ashley被介绍了另一种给出显示数学的方法：环境equation。
+
+\begin{miniexammar}{.5\textandmarginlen}%
+{
+The fundamental theorem of calculus can be expressed in the form of Equation \ref{eq:fundthmcal}
+\begin{equation}
+\int_a^b f(x) \dx = F(b) - F(a) \label{eq:fundthmcal}
+\end{equation}
+}
+\begin{lstlisting}
+The fundamental theorem of calculus can be expressed in the form of Equation \ref{eq:fundthmcal}
+\begin{equation}
+\int_a^b f(x) \dx = F(b) - F(a) \label{eq:fundthmcal}
+\end{equation}
+\end{lstlisting}
+\end{miniexammar}
+
+Ashley 通过他之前的知识理解了这个等式：下划线 (\verb=_=) 将下标 ($a$) 引入积分符号 $\int$ (\verb=\int=)，而插入符号 (\verb=^=) 将上标 ($b$) 引入其中。 命令 \verb=\dx= 由 xjtlumath 提供。 如果Ashley直接输入dx，结果会是这样的$\int f(x) dx$，难看。 \verb=\dx= 优化结果。 注意\verb=\dx= 只能用来表示积分变量，因为它在它前面加了一点空格。 如果Ashley 需要使用其他变量，他需要使用命令\verb=\dd=。 xjtlumath 也为多重积分提供了相同的功能。
+
+\begin{miniexammar}{.6\textandmarginlen}%
+{
+\[
+\int f(t) \dd t,\quad
+\iint f(x,y) \dxdy,\quad
+\iiint f(x,y,z) \dxdydz
+\]
+\[
+\iint f \drdt,\quad
+\iiint f \dzdrdt,\quad
+\iiint f \drdtdp
+\]
+}
+\begin{lstlisting}
+\[
+\int f(t) \dd t,\quad
+\iint f(x,y) \dxdy,\quad
+\iiint f(x,y,z) \dxdydz
+\]
+\[
+\iint f \drdt,\quad
+\iiint f \dzdrdt,\quad
+\iiint f \drdtdp
+\]
+\end{lstlisting}
+\end{miniexammar}
+
+然而，Ashley 对 \LaTeX{} 中的交叉引用以及环境equation一无所知。让我们向Ashley解释它们。在\LaTeX{} 中，一个环境由\verb=\begin= 命令开始并以\verb=\end= 命令结束。环境的名称被传递给这对命令。环境equation给出了一个显示的数学方程，它是 \emph{被计数的}。equation末尾的 \verb=\label= 命令捕获计数器以及其他一些信息，例如其位置，并将其存储在由赋予 \verb=\label= 的名称表示的标签中。要使用标签，Ashley 需要 \verb=\ref= 命令，该命令打印计数器\footnote{并另外生成一个可点击的超链接，点击时导航到方程的位置，这是 hyperref ,此模板加载的包的效果。}。
+
+equation 环境给出了一个计数器，而 \verb=\[\]= 没有。在后者使用标签会导致标签被定向到另一个计数器，因此仅当该事物被计数时才使用标签。
+
+\subsection{空白管理}
+\LaTeX{} 中的空间管理比仅仅输入空格要复杂一些。 Ashley是个细心的人，他很快发现句子后面的空格比单词之间的空格大一点（你可以放大.pdf文件看到这个）。 \LaTeX{} 决定一个空格作为句子末尾的空格，如果
+\begin{enumerate}
+\item 终止句子的标点符号后紧跟此空格，并且
+\item 如果终止句子的标点符号是句号，则句号前的字母要是小写。
+\end{enumerate}
+大多数句子都按照上述规则结束，但也有一些例外。 例如，\LaTeX{} 可能将 Mr.~ 作为句子结尾的符号，从而产生错误的间距。 在这种情况下，Ashley 需要通过 \verb=~= 和 \verb=\@= 手动配置 \LaTeX{}。
+
+\begin{parexammar}{.5\textandmarginlen}%
+{
+In another world, Mr.~Ashley was once loved by Miss Scarlett. In this world, Mr.~Ashley has a PC\@. He loves programming on his PC.
+}
+\begin{lstlisting}
+In another world, Mr.~Ashley was once loved by Miss Scarlett. In this world, Mr.~Ashley has a PC\@. He loves programming on his PC.
+\end{lstlisting}
+\end{parexammar}
+Ashley很高兴学会了如何管理空间。 然而很快他又发现了另一个问题。
+
+\begin{parexammar}{.5\textandmarginlen}%
+{
+Some commands like \LaTeX seems to eat the space after it.
+}
+\begin{lstlisting}
+Some commands like \LaTeX seems to eat the space after it.
+\end{lstlisting}
+\end{parexammar}
+为了解决这个问题，Ashley 需要在命令的末尾添加一个空组（\verb={}=）。
+
+至于数学公式，事情就变得不一样了。 \LaTeX{} 忽略数学模式下的所有空格，无论是内联的还是显示的。 要添加额外的空格，Ashley 必须使用表 \ref{tab:spacemath} 中显示的命令。
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ll}
+Command & Effect (approximately) \\
+\hline
+\verb=\,= & $\frac{3}{18}$ quad (\showwidth{.166666em}) \vspace{5pt}\\
+\verb=\:= & $\frac{4}{18}$ quad (\showwidth{.222222em}) \vspace{5pt}\\
+\verb=\;= & $\frac{5}{18}$ quad (\showwidth{.277777em}) \vspace{5pt}\\
+\verb=\ = (\verb=\= followed by a space) & a space \vspace{5pt}\\
+\verb=\quad= & Width of `M' in current font (\showwidth{1em}) \vspace{5pt}\\
+\verb=\qquad= & 2 quad (\showwidth{2em})
+\end{tabular}
+\end{center}
+\caption{空格在数学模式下}
+\label{tab:spacemath}
+\end{table}
+
+\subsection{列表和其他环境}
+现在Ashley已经学会了处理文本，他继续他的写作。很快，他不得不再次停止，因为他正在制定一份列表。 起初，他对列表进行了硬编码，如下所示：
+
+\begin{parexammar}{.4\textandmarginlen}{
+1. Something
+
+2. Something
+
+3. Something
+}
+\begin{lstlisting}
+1. Something
+
+2. Something
+
+3. Something
+\end{lstlisting}
+\end{parexammar}
+然而，这个解决方案看起来相当愚蠢。 另外，如果Ashley想要更改号码，他需要手动完成。 他想知道 \LaTeX{} 是否有一些更方便的方法来做到这一点。
+
+幸运的是有。 \LaTeX{} 提供了几种处理列表的环境。 一个例子如下所示。
+
+\begin{miniexammar}{.4\textandmarginlen}{
+\begin{enumerate}
+\item Something
+\item Something
+\item Something
+\end{enumerate}
+}
+\begin{lstlisting}
+\begin{enumerate}
+\item Something
+\item Something
+\item Something
+\end{enumerate}
+\end{lstlisting}
+\end{miniexammar}
+
+现在Ashley几乎拥有他需要知道的一切。 他对自己写的东西很满意，感到很高兴。 现在对他来说重要的是他想以更花哨的方式展示定理、定义和其他东西，以便他的读者可以专注于这些。
+
+为此，xjtlumath 提供了一些花哨的环境。
+
+\begin{miniexammar}{.6\textandmarginlen}{
+\begin{definition}[Absolute Convergence]
+An infinite series $\infseries{n}{0}$ is said to be absolutely convergent iff
+\[
+\sum_{n=0}^\infty |a_n|
+\]
+converges
+\end{definition}
+}
+\begin{lstlisting}
+\begin{definition}[Absolute Convergence]
+An infinite series $\infseries{n}{0}$ is said to be absolutely convergent iff
+\[
+\sum_{n=0}^\infty |a_n|
+\]
+converges
+\end{definition}
+\end{lstlisting}
+\end{miniexammar}
+
+xjtlumath 加载 amsthm，它提供了proof环境。 当 Ashley 使用这个环境写证明时，他发现在环境的末尾出现了一个 q.e.d.~符号。 
+\begin{miniexammar}{.5\textandmarginlen}{
+Now we prove the mean value theorem for definite integrals. That is, for a continuous function $f$ that is bounded on $[a,b]$, the definite integral $\int_a^b f(x) \dx = f(c)(b-a)$, where $c \in [a,b]$. 
+\begin{proof}
+Let $m,M$ be the infimum and supermum of $f([a,b])$, respectively.
+Therefore, $m\le f \le M$, and
+\[
+\int_a^b m \dx \le \int_a^b f(x) \dx \le \int_a^b M \dx
+\]
+, which gives
+\begin{align}
+m(b-a) \le &\int_a^b f(x) \dx \le M(b-a) \nonumber\\
+m \le &\frac{\int_a^b f(x) \dx}{b-a} \le M \label{eq:meanvalint}
+\end{align}
+
+Since that $f$ is continuous, it can reach every value between the infimum and supermum of its range. That is, $\exists c \in [a,b], f(c) = \int_a^b f(x) \dx$. Substitute $f(c)$ back to equation \ref{eq:meanvalint} gives what the theorem states.
+\end{proof}
+}
+\begin{lstlisting}[basicstyle=\footnotesize]
+Now we prove the mean value theorem for definite integrals. That is, for a continuous function $f$ that is bounded on $[a,b]$, the definite integral $\int_a^b f(x) \dx = f(c)(b-a)$, where $c \in [a,b]$. 
+\begin{proof}
+Let $m,M$ be the infimum and supermum of $f([a,b])$, respectively.
+Therefore, $m\le f \le M$, and
+\[
+\int_a^b m \dx \le \int_a^b f(x) \dx \le \int_a^b M \dx
+\]
+, which gives
+\begin{align}
+m(b-a) \le &\int_a^b f(x) \dx \le M(b-a) \nonumber\\
+m \le &\frac{\int_a^b f(x) \dx}{b-a} \le M \label{eq:meanvalint}
+\end{align}
+
+Since that $f$ is continuous, it can reach every value between the infimum and supermum of its range. That is, $\exists c \in [a,b], f(c) = \int_a^b f(x) \dx$. Substitute $f(c)$ back to equation \ref{eq:meanvalint} gives what the theorem states.
+\end{proof}
+\end{lstlisting}
+\end{miniexammar}
+
+Ashley 能够通过使用 proof 提供的 \verb=\qedhere= 命令来控制 q.e.d.~符号出现的位置。 如果这个命令在之前被给出，那么它就不会出现在最后。
+\begin{miniexammar}{.5\textandmarginlen}{
+\begin{proof}
+Some words...
+\[
+a+b=c \qedhere
+\]
+Som words...
+\end{proof}
+}
+\begin{lstlisting}
+\begin{proof}
+Some words...
+\[
+a+b=c \qedhere
+\]
+Som words...
+\end{proof}
+\end{lstlisting}
+\end{miniexammar}
+
+除了definition和proof，Ashley 还能够使用theorem, proposition, corollary, lemma, axiom, and example. 除了proof之外，这些环境拥有各自的计数器，Ashley 可以简单地使用标签来引用它们。
+
+不过，Ashley的同事 超 抱怨到当他尝试写中文资料时，这些环境的标题还是英文。为了支持中文，xjtlumath给这些环境(不幸的是，在中文环境下，proof的标题也变成了中文，就没有英文版的了)增加了中文版本，只要在最后加一个c即可使用中文版本。
+
+这些设施极大地帮助了Ashley的资料准备，他很快就会完成他的工作……

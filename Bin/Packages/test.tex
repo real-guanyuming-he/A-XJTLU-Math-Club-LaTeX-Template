@@ -1,51 +1,11 @@
 \documentclass{article}
 
-\usepackage[framemethod=TikZ]{mdframed}
-
-% The following style is the example included in mdframed documentation, 
-% with minor adjustments.
-\newcounter{thmcnt}[section]
-\newcounter{deficnt}[section]
-\newcounter{lemmacnt}[section]
-\newcounter{propcnt}[section]
-\newcounter{corocnt}[section]
-\newcounter{axiomcnt}[section]
-\newcounter{examcnt}[section]
-
-% #1 env name #2 cnt name #3 env title
-\newcommand{\newmdthmenv}[3]{%
-% #1 caption
-\newenvironment{#1}[1][]{%
-\stepcounter{#2}%
-\ifstrempty{#1}%
-{%
-\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]%
-\node[anchor=east,rectangle,fill=blue!20]
-{\strut #3~\arabic{#2}};}
-}%
-}%
-{
-\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]%
-\node[anchor=east,rectangle,fill=blue!20]
-{\strut #3~\arabic{#2}:~##1};}
-}
-}
-\mdfsetup{innertopmargin=5pt,linecolor=blue!20,linewidth=2pt,topline=true,frametitleaboveskip=-1em}
-\begin{mdframed}[]\relax%
-}%
-{%
-\end{mdframed}
-}%
-}
-
-\newmdthmenv{theorem}{thmcnt}{Theorem}
+\usepackage{graphicx}
 
 \begin{document}
-\begin{theorem}[aaa]
-Something
-\end{theorem}
+aaa
+
+\vspace{14cm}
+
+\includegraphics[height=15cm]{examplelogo}
 \end{document}

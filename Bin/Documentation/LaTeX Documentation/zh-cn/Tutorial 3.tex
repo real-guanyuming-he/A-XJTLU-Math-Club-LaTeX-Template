@@ -1,0 +1,221 @@
+\section{教程 3: 月处理floats}
+月正在为数学部的月刊准备材料。 她想让她的材料有趣且易于理解，因此她使用了许多图形和表格。
+
+图形、表格和许多其他占据随机宽度和高度（通常很大）区域的东西在 \LaTeX{} 中被视为 \emph{floats}。 Floats在今天的文档中很常见，但它们在排版时会造成很大的麻烦。 在本节中，我们将与月一起了解如何在 \LaTeX{} 中处理floats。
+
+\subsection{插入图像}
+要在 \LaTeX{} 中插入图像，包 graphicsx（由模板文件加载）是一个不错的选择。 它提供了接受输入图像文件名和一些可选说明符的命令 \verb=\includegraphics=。
+\begin{miniexammar}{.4\textandmarginlen}{
+\includegraphics[width=\textwidth]{assets/examplelogo.jpg}
+}
+\begin{lstlisting}
+\includegraphics[width=\textwidth]{assets/examplelogo.jpg}
+\end{lstlisting}
+\end{miniexammar}
+
+月很快发现，简单地使用这个命令并不是一个好的选择，因为如果图像没有足够的垂直空间，它会被放置在下一页，留下一个很大的空白区域，非常难看。 此外，她无法为图像提供标题或引用它。
+
+所以，月用使图像成为 \emph{figure} 的 figure 环境包裹了图像。
+\begin{miniexammar}{.45\textandmarginlen}{
+% figure with a caption cannot be placed inside a minipage, so we fake it here. 
+\includegraphics[width=\textwidth]{assets/examplelogo.jpg}
+\begin{center}
+\hypertarget{fakedcaption}{Figure 1: Example Logo}
+\end{center}
+Figure \hyperlink{fakedcaption}{1} shows the figure Yue uses.
+}
+\begin{lstlisting}
+\begin{figure}
+\includegraphics[width=\textwidth]{assets/examplelogo.jpg}
+\caption{Example Logo}
+\label{fig:example}
+\end{figure}
+Figure \ref{fig:example} shows the figure Yue uses.
+\end{lstlisting}
+\end{miniexammar}
+
+\LaTeX{} 会自动给它一个数字，以便月能够引用它。 请注意，由于内部实现原因，\verb=\label= 只能紧跟在 \verb=\caption= 之后，以免引用错误。
+
+\subsection{表}
+即使使用数字确实需要额外的环境，但它仍然很简单，月很快就熟悉了。 然而，在 \LaTeX{} 中处理表格更为复杂。
+
+要在 \LaTeX 中生成类似表格的内容，月必须使用特殊环境。 tabular和array是其中的两个具体例子。 事实上，这两种环境在大多数方面是相似的，一个主要区别是array经常用于数学模式。
+
+array 和 tabular 的语法类似于 Delilah 使用的矩阵环境之一，尽管在这里月必须明确指定列行为。
+\begin{miniexammar}{.4\textandmarginlen}{
+\begin{tabular}{|c|c|}
+\hline 
+Entry 1 & Entry 2\\
+\hline
+a & b\\
+\hline
+\end{tabular}
+}
+\begin{lstlisting}
+\begin{tabular}{|c|c|}
+\hline 
+Entry 1 & Entry 2\\
+\hline
+a & b\\
+\hline
+\end{tabular}
+\end{lstlisting}
+\end{miniexammar}
+
+月不太明白\verb=|c|c|= 是什么意思，所以她在网上搜索了这个。 这告诉她传递给 tabular 的这个参数指定了每一列。 字母 c 告诉表格该列中的内容应该居中。 另外两个对齐说明符 l 和 r 分别可用于“左”和“右”。 竖线表示在此位置应插入一条垂直线（比较指示在当前行顶部插入水平线的 \verb=\hline= 命令）
+
+当给定 c、l 和 r 时，列的宽度由内容的宽度决定。 通过使用另一个说明符“p”，Yue 能够控制列的宽度，其中内容是左对齐的。
+\begin{miniexammar}{.4\textandmarginlen}{
+\begin{tabular}{|c|p{2cm}|}
+\hline 
+Entry 1 & Entry 2\\
+\hline
+a & b\\
+\hline
+\end{tabular}
+}
+\begin{lstlisting}
+\begin{tabular}{|c|p{2cm}|}
+\hline 
+Entry 1 & Entry 2\\
+\hline
+a & b\\
+\hline
+\end{tabular}
+\end{lstlisting}
+\end{miniexammar}
+
+当有许多列具有相同的说明符时，月可以使用这种语法 \verb=*{num}{spe}= 来重复说明符，其中 num 是重复的次数，spe 是说明符。
+\begin{miniexammar}{.4\textandmarginlen}{
+\begin{tabular}{|*{7}{c|}}
+\hline 
+a&a&a&a&a&a&a\\
+\hline
+a&a&a&a&a&a&a\\
+\hline
+\end{tabular}
+}
+\begin{lstlisting}
+\begin{tabular}{|*{7}{c|}}
+\hline 
+a&a&a&a&a&a&a\\
+\hline
+a&a&a&a&a&a&a\\
+\hline
+\end{tabular}
+\end{lstlisting}
+\end{miniexammar}
+
+月不喜欢用线来分行列的表格，因为她认为它们不整洁。 她想用空间来分隔内容。 她可以在列说明符之间使用 \verb=@{\hspace{}}= 来指定列间空间，并在 \verb=\\= 之前使用 \verb=\vspace{}= 在下一行之前添加额外的空间。
+\begin{miniexammar}{.4\textandmarginlen}{
+\begin{tabular}{c@{\hspace{1cm}}cc}
+a & b & b\\
+a & b & b\vspace{.5cm}\\
+c & d & d\vspace{.5cm}\\
+\end{tabular}
+}
+\begin{lstlisting}
+\begin{tabular}{c@{\hspace{1cm}}cc}
+a & b & b\\
+a & b & b\vspace{.5cm}\\
+c & d & d\vspace{.5cm}\\
+\end{tabular} 
+\end{lstlisting}
+\end{miniexammar}
+
+实际上，在\verb=@{}=里面，月不仅可以使用空格，还可以使用其他任何内容。
+\begin{miniexammar}{.45\textandmarginlen}{
+\begin{tabular}{c@{ <POLICE, stay away> }c}
+crime scene & people \\
+crime scene & people \\
+\end{tabular}
+}
+\begin{lstlisting}
+\begin{tabular}{c@{ <POLICE, stay away> }c}
+crime scene & people \\
+crime scene & people \\
+\end{tabular}
+\end{lstlisting}
+\end{miniexammar}
+
+与环境figure一样，环境table被设计为接受类似表的内容。
+\begin{miniexammar}{.4\textandmarginlen}{
+\begin{tabular}{cc}
+a & b \\
+c & d \\
+\end{tabular}
+\begin{center}
+\hypertarget{fakedcaptiontab}{Table 1: Example Table}
+\end{center}
+Table \hyperlink{fakedcaptiontab}{1} shows a table.
+}
+\begin{lstlisting}
+\begin{table}
+\begin{tabular}{cc}
+a & b \\
+c & d \\
+\end{tabular}
+\caption{Example Table}
+\label{tab:example}
+\end{table}
+Table \ref{tab:example} shows a table.
+\end{lstlisting}
+\end{miniexammar}
+
+既然月了解了如何在\LaTeX{} 中操作类似表格的内容，她很快就会继续工作。 在某些时候，她必须创建一个包含至少 20 列的超大表，她发现它超出了页面。 当她尝试使用 \verb=\small= 来减小文本的大小时，她发现她必须为表格的每个条目复制它，这意味着要重复数百次。 为了控制整体风格，Yue 需要在 table 的开头和 tabular 的开头之间给出控制命令。
+
+\begin{miniexammar}{.5\textandmarginlen}{
+{
+\tiny
+\begin{tabular}{|*{14}{c|}}
+\hline 
+a&a&a&a&a&a&a&a&a&a&a&a&a&a\\
+\hline
+a&a&a&a&a&a&a&a&a&a&a&a&a&a\\
+\hline
+\end{tabular}
+}
+}
+\begin{lstlisting}
+\begin{table}
+\small
+\begin{tabular}{|*{14}{c|}}
+\hline 
+a&a&a&a&a&a&a&a&a&a&a&a&a&a\\
+\hline
+a&a&a&a&a&a&a&a&a&a&a&a&a&a\\
+\hline
+\end{tabular}
+\end{table}
+\end{lstlisting}
+\end{miniexammar}
+
+\subsection{放置floats}
+月曾经使用 Microsoft Word，它可以将floats放在用户想要放置的任何位置。 自从她转向 \LaTeX 一段时间以来，一切都很好，但现在月出现了问题。 一个图从输出中“消失了”。 一次次检查她的代码和输出后，她意外地发现下一页出现了这个图。 这真的让她很困惑。 由于 \TeX 的内部算法，技术上不可能将每个float排列在用户想要放置它们的位置。 根据 \textit{the \LaTeX{} Companion}，
+\begin{quotation}
+``Floats are often problematic in the present version of \LaTeX, because the system was developed at a time when documents contained considerably less graphical material than they do today.''
+\end{quotation}
+
+然而\LaTeX{} 确实提供了一些选项，允许Yue 在某种程度上控制floats的位置。 对于figure或table环境，Yue 能够向它传递一个可选参数，指定所需的位置。 有五个放置说明符，它们可以按任何顺序组合在一起。
+\begin{description}
+\item[!] 忽略一些 \LaTeX{} 限制\footnote{\LaTeX{} 在尝试放置floats时有一些限制。 例如，如果float的高度大于页面高度的某种程度，则在尝试放置此float时无法将其放置在页面底部。}。
+\item[h] 尝试将float准确地放置在环境被给定时的位置。 如果尝试失败并且除此之外没有其他说明符除了！被给定，说明符将更改为 t。
+\item[t] 尝试将float放置在页面顶部。
+\item[b] 尝试将float放置在页面底部。
+\item[p] 尝试将浮动放置在float页面（由 \LaTeX{} 生成的用于放置floats的页面）
+\end{description}
+\LaTeX{} 尝试按照上述列表从上到下的顺序根据说明符放置一个float。 通常，文档的所有floats都可以被正确处理。 但是如果一个float被证明无法处理，作者应该调整（大概率减少）它的宽度和高度。
+
+\subsection{Floats的目录}
+正如开头提到的，在月的材料中，有很多floats。 她想知道是否有办法为他们提供快速参考。
+
+与\verb=\tableofcontents= 一样，\LaTeX{} 提供了以下两个命令，分别打印文档中使用的所有图形列表和所有表格列表。
+\begin{verbatim}
+\listoffigures and \listoftables
+\end{verbatim}
+出现在列表中的float名称由float的caption定义。 如果caption看起来太长，Yue 可以向caption传递一个可选参数，该参数将显示在列表中。 另外，不要忘记编译文件至少两次以使列表正确显示。
+
+\subsection{关于图的一些建议}
+月被建议对图像使用矢量图，因为当图像与输出文件一起缩放时矢量图是无损的。
+
+有几个软件包可以直接在 \LaTeX{} 中绘制图像，但使用它们都需要付出很大的努力。 建议使用现代工具生成适当的图像（例如 Mathematica 能够导出绘制的数学图。）。

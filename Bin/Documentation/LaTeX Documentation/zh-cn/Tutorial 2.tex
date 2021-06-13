@@ -1,9 +1,8 @@
-\section{Tutorial 2: Delilah and Complex Math Formulae}
-Delilah is working on a part of a material about linear algebra. As her work proceeds, she will obtain the ability to deal with complex mathematical formulae in \LaTeX{}, especially those methods provided by the ams packages loaded in xjtlumath.
+\section{教程2: Delilah和复杂的数学公式}
+Delilah 正在研究有关线性代数的材料的一部分。 随着工作的进行，她将获得处理 \LaTeX{} 中复杂数学公式的能力，尤其是 xjtlumath 中加载的 ams 包提供的那些方法。 
 
-\subsection{Multiple Lined Formulae}
-A system of linear equations is a fundamental part of linear algebra. When Delilah tries to type a group of equations, she encounters a problem. In the predefined \verb=\[\]= and environment equation, she finds no option to start a new line. Even the line-break options of \LaTeX{} like \verb=\\= and \verb=\newline= do not work there. Of course the equations should not be put in one line, so what should she do now? Later she learns that the environment \emph{aligned} is designed to allow a system of equations to be aligned in multiple lines:
-
+\subsection{多行公式}
+线性方程组是线性代数的基本部分。 当 Delilah 尝试输入一组方程时，她遇到了一个问题。 在预定义的 \verb=\[\]= 和环境equation中，她找不到开始新行的选项。 甚至 \LaTeX{} 的换行选项，如 \verb=\\= 和 \verb=\newline= 在那里也不起作用。 一个方程组当然不应该放在一行，那她现在该怎么办？ 后来她了解到环境 \emph{aligned} 旨在允许方程组在多行中对齐：
 \begin{miniexammar}{.4\textandmarginlen}{
 \[
 \begin{aligned}
@@ -21,10 +20,10 @@ x-y &= 2
 \]
 \end{lstlisting}
 \end{miniexammar}
-Here, the ampersand sign \verb=&= is used before the symbols according to which the equations are to be aligned. The line break sign \verb=\\= starts a new line of equation. Note that other line-break operations cannot be used here.
 
-Delilah likes the result, but she feels that the equations are too lonely. She thinks that adding a large curly bracket for them will comfort them. \LaTeX{} supports a syntax to put things before and after a group of things.
+这里，与符号 \verb=&= 用在方程要对齐的符号之前。 换行符 \verb=\\= 开始一行新的等式。 请注意，此处不能使用其他换行操作。
 
+Delilah 喜欢这个结果，但她觉得方程式太孤单了。 她认为为他们添加一个大花括号会安慰他们。 \LaTeX{} 支持将分隔符放在一组事物之前和之后的语法。
 \begin{miniexammar}{.4\textandmarginlen}{
 \[
 \left\{
@@ -46,10 +45,9 @@ x-y &= 2
 \]
 \end{lstlisting}
 \end{miniexammar}
-The \verb=\left= command defines what is to be put on the left, and the \verb=\right= command defines what is to be put on the right. Delilah does not want to put anything on the right, so she writes \verb=.= for nothing.
+\verb=\left= 命令定义要放在左边的东西，而\verb=\right= 命令定义要放在右边的东西。 Delilah 不想把任何东西放在右边，所以写了 \verb=.=表示空。
 
-For a group of equations that requires no alignment, or for a single equation that is too long to fit in one line, the environment \emph{gathered} that does no alignment is a better choice:
-
+对于一组不需要对齐的方程，或者对于一个太长而不能放在一行中的单个方程，没有对齐的环境 \emph{gathered} 是更好的选择：
 \begin{miniexammar}{.45\textandmarginlen}{
 \[
 \begin{gathered}
@@ -68,8 +66,7 @@ For a group of equations that requires no alignment, or for a single equation th
 \end{lstlisting}
 \end{miniexammar}
 
-After writing several groups of equations, Delilah wants to reference one of them. She uses the equation environment instead of \verb=\[\]=, but finds out that the equations are numbered as a whole.
-
+写了几组方程后，Delilah 想引用其中的一组。 她使用equation环境而不是 \verb=\[\]=，但发现方程是作为一个整体编号的。
 \begin{miniexammar}{.4\textandmarginlen}{
 \begin{equation}
 \begin{aligned}
@@ -87,7 +84,7 @@ x-y &= 2
 \end{equation}
 \end{lstlisting}
 \end{miniexammar}
-So it is difficult for her to reference a single equation in a group. amsmath provides the environment align for this purpose:
+所以她很难在一个组中引用单个方程。 amsmath 为此提供环境 align：
 
 \begin{miniexammar}{.4\textandmarginlen}{
 \begin{align}
@@ -103,7 +100,7 @@ x-y &= 2
 \end{lstlisting}
 \end{miniexammar}
 
-If she doesn't want to number a single equation, she needs to append \verb=\nonumber= at the end of that line.
+如果她不想为单个方程编号，则需要在该行的末尾附加 \verb=\nonumber=。
 \begin{miniexammar}{.4\textandmarginlen}{
 \begin{align}
 x+y &= 1\\
@@ -120,9 +117,9 @@ x-y &= 2
 \end{lstlisting}
 \end{miniexammar}
 
-Without the ``ed'' suffix, \emph{gather} is also a standalone environment that does what gathered do. But there is a major difference between the normal version and ``ed''ed version. Delilah finds it impossible to put the bracket again before a align or gather, because they don't need to be surrounded by mathematical environments. Also, their width are fixed to be the width of texts, while their ``ed''ed versions can be of any width.
+如果没有 'ed' 后缀，\emph{gather} 也是一个独立的环境，可以完成gather的工作。 但是普通版本和“ed”版本之间有一个主要区别。 Delilah 发现不可能在对齐或聚集之前再次放置括号，因为它们不需要但被数学环境包围。 此外，它们的宽度固定为文本的宽度，而它们的“ed”版本可以是任何宽度。如果没有 'ed' 后缀，\emph{gather} 也是一个独立的环境，可以完成聚集的工作。 但是普通版本和“ed”版本之间有一个主要区别。 Delilah 发现不可能在对齐或聚集之前再次放置括号，因为它们不需要但被数学环境包围。 此外，它们的宽度固定为文本的宽度，而它们的“ed”版本可以是任何宽度。
 
-As the same as the equation environment, their starred versions give no number by default.
+与 equation 环境一样，它们的星号版本默认不给出数字。
 \begin{miniexammar}{.4\textandmarginlen}{
 \begin{align*}
 x+y &= 1\\
@@ -137,7 +134,7 @@ x-y &= 2
 \end{lstlisting}
 \end{miniexammar}
 
-Delilah is able to put multiple groups of equations in one align, just by adding ampersands between the groups.
+Delilah 能够将多组方程放在一个列中，只需在组之间添加\verb=&=号即可。
 \begin{miniexammar}{.4\textandmarginlen}{
 \begin{align*}
 x+y &= 1  & a+b &= 3\\
@@ -151,12 +148,12 @@ x-y &= 2  & a-b &= 4
 \end{align*}
 \end{lstlisting}
 \end{miniexammar}
-The space between the groups is adjusted automatically by align.
+align 自动调整方程组之间的空间。
 
-\subsection{Matrices}
-Matrices are vital to linear algebra, as they represent linear mappings from a vector space to another in specific bases. Also, the coefficient matrix and the augmented matrix are convenient in operating linear equations.
+\subsection{矩阵}
+矩阵对于线性代数至关重要，因为它们表示从一个向量空间到另一个特定基底的线性映射。 此外，系数矩阵和增广矩阵便于操作线性方程。
 
-amsmath provides several environments for typing matrices.
+amsmath 提供了多种输入矩阵的环境。
 \begin{miniexammar}{.5\textandmarginlen}{
 \[
 \begin{bmatrix}
@@ -178,9 +175,9 @@ amsmath provides several environments for typing matrices.
 \]
 \end{lstlisting}
 \end{miniexammar}
-The environments pmatrix, Bmatrix, vmatrix, and Vmatrix produce delimiters of \verb=()=, \verb={}=, \verb=||=, and \verb=|| ||=, respectively.
+环境 pmatrix、Bmatrix、vmatrix 和 Vmatrix 分别产生分隔符 \verb=()=、\verb={}=、\verb=||= 和 \verb=|| ||=。
 
-To use matrices in inline mode, Delilah uses the environment smallmatrix, which has no p,b,B,v,V versions in amsmath, as it is the author's responsibility to decide the delimiters.
+为了在inline模式下使用矩阵，Delilah 使用环境 smallmatrix，它在 amsmath 中没有 p,b,B,v,V 版本，因为决定分隔符是作者的责任。
 \begin{miniexammar}{.4\textandmarginlen}{
 The matrix $\left(\begin{smallmatrix} a&b\\c&d \end{smallmatrix}\right)$ is so small and cute!
 }
@@ -189,8 +186,8 @@ The matrix $\left(\begin{smallmatrix} a&b\\c&d \end{smallmatrix}\right)$ is so s
 \end{lstlisting}
 \end{miniexammar}
 
-When Delilah tries to put fractions inside a matrix, she finds something annoying.
-\begin{miniexammar}{.3\textandmarginlen}{
+当 Delilah 尝试将分数放入矩阵中时，她发现有些烦人事
+。\begin{miniexammar}{.3\textandmarginlen}{
 \[
 \begin{bmatrix}
 1&\frac{1}{2}&\frac{1}{3}\\
@@ -207,7 +204,7 @@ When Delilah tries to put fractions inside a matrix, she finds something annoyin
 \]
 \end{lstlisting}
 \end{miniexammar}
-The fractions above and below are so close that they touch each other! This is not what Delilah wants and she is surprised that \LaTeX{} doesn't detect this and do something. Fortunately, in amsmath environments, an optional argument is allowed to be passed to \verb=\\= to define the actual vertical space between lines. For fractions, 2ex is a good option. Also, the fractions are in inline mode. The \verb=\dfrac= command gives displayed fractions.
+上面和下面的分数非常接近，以至于它们相互接触！ 这不是 Delilah 想要的，她很惊讶 \LaTeX{} 没有检测到这一点并做一些事情。 幸运的是，在 amsmath 环境中，允许将可选参数传递给 \verb=\\= 以定义行之间的实际垂直空间。 对于分数，2ex 是一个不错的选择。 此外，分数处于inline模式。 \verb=\dfrac= 命令给出displayed模式的分数。
 \begin{miniexammar}{.3\textandmarginlen}{
 \[
 \begin{bmatrix}
@@ -226,7 +223,7 @@ The fractions above and below are so close that they touch each other! This is n
 \end{lstlisting}
 \end{miniexammar}
 
-Sometimes a matrix is too large to be displayed fully. At these times, the use of ellipses (plural of ellipsis, not ellipse) is important. When Delilah writes the inverse of a matrix, she uses ellipses.
+有时矩阵太大而无法完全显示。 在这些时候，使用省略号很重要。 当 Delilah 写出矩阵的逆时，她使用省略号。
 \begin{miniexammar}{.5\textandmarginlen}{
 \[
 A^{-1} = \frac{1}{\det A}
@@ -251,8 +248,8 @@ C_{n2} & C_{n2} & \cdots & C_{nn} \\
 \end{lstlisting}
 \end{miniexammar}
 
-\subsection{Texts and Operator Names}
-To put text inside math environments, Delilah uses the \verb=\text= command provided by amsmath.
+\subsection{文字和运算符}
+要将文本放入数学环境中，Delilah 使用 amsmath 提供的 \verb=\text= 命令。
 \begin{miniexammar}{.57\textandmarginlen}{
 \begin{definition}[Null Space]
 The null space of an $m \times n$ matrix $A$, written as $\Nul A$, is the set of all solutions
@@ -273,8 +270,8 @@ of the homogeneous equation $A\vec{x} = \vec{0}$. In set notation,
 \end{lstlisting}
 \end{miniexammar}
 
-The commands like \verb=\Nul=, \verb=\sin=, ... are math operators. Part of predefined math operators in \LaTeX{} are shown in Table \ref{tab:predefmathop}.
-\begin{table}[hbpt]
+\verb=\Nul=, \verb=\sin=, ... 等命令是数学运算符。 \LaTeX{} 中的部分预定义数学运算符显示在表 \ref{tab:predefmathop} 中。
+\begin{table}[hbpt]·
 \begin{center}
 \small
 \begin{tabular}{cl|cl|cl}
@@ -291,13 +288,13 @@ inf & \verb=\inf= &  &  &  &  \\
 ker & \verb=\ker= & det & \verb=\det= & exp & \verb=\exp= 
 \end{tabular}
 \end{center}
-\caption{Some Predefined Math Operators}
+\caption{一些预定义的数学运算符}
 \label{tab:predefmathop}
 \end{table}
 
-In fact, operator \verb=\Nul= and \verb=\Span= are defined by xjtlumath as in the forms in the year 1 linear algebra textbook of XJTLU. Also, xjtlumath changes the default \verb=\vec= command in \LaTeX{} so that vectors appear in bold form rather than with a arrow above them.
+实际上，运算符\verb=\Nul= 和\verb=\Span= 是由xjtlumath 定义的，如西浦一年级线性代数教科书中的形式。 此外，xjtlumath 更改了 \LaTeX{} 中的默认 \verb=\vec= 命令，以便矢量以粗体形式出现，而不是在其上方带有箭头。
 
-Some operators, like \verb=\lim=, are designed to support taking limits. That is, in displayed mode, when one tries to give one of such operators a subscript using \verb=_=, the subscript will appear at the bottom of the operator.
+一些运算符，如 \verb=\lim=，旨在支持对它取极限。 也就是说，在displayed模式下，当试图使用 \verb=_= 给这样的运算符一下标时，下标将出现在运算符的底部。
 \begin{parexammar}{.4\textandmarginlen}{
 \[
 \lim_{x\to 0} f(x)
@@ -310,7 +307,7 @@ Some operators, like \verb=\lim=, are designed to support taking limits. That is
 \end{lstlisting}
 \end{parexammar}
 
-Delilah is able to explicitly control the limit style by using \verb=\limits= and \verb=\nolimits=. Note that these two commands can only be used after a operation that supports taking limits.
+Delilah 能够通过使用 \verb=\limits= 和 \verb=\nolimits= 来明确控制极限样式。 请注意，这两个命令只能在支持采取极限的操作后使用。
 \begin{parexammar}{.4\textandmarginlen}{
 $\lim\limits_{x \to 0}f(x)$
 \[
@@ -325,8 +322,8 @@ $\lim\limits_{x \to 0}f(x)$
 \end{lstlisting}
 \end{parexammar}
 
-\subsection{Symbols}
-The standard \LaTeX{} font in math environments is neat and clean. Yet in some special occasions Delilah would like to change the font of some symbols. For example, to represent some conventional sets, she uses the blackboard font.
+\subsection{符号}
+数学环境中的标准 \LaTeX{} 字体整洁干净。 然而在一些特殊场合，Delilah 想改变一些符号的字体。 例如，为了表示一些常规集合，她使用黑板字体。
 \begin{parexammar}{.4\textandmarginlen}{
 \[
 \mathbb{R}\quad \mathbb{N}\quad \mathbb{Q}\quad \mathbb{Z}
@@ -339,7 +336,7 @@ The standard \LaTeX{} font in math environments is neat and clean. Yet in some s
 \end{lstlisting}
 \end{parexammar}
 
-Writing \verb=\mathbb= every time is somehow irritating. For this purpose, xjtlumath defines shorthands for them.
+每次都写 \verb=\mathbb= 有点烦人。 为此，xjtlumath 为它们定义了简写。
 \begin{parexammar}{.45\textandmarginlen}{
 \[
 \setr \quad \setq \quad \setz \quad \setn \quad \setnp
@@ -352,7 +349,7 @@ Writing \verb=\mathbb= every time is somehow irritating. For this purpose, xjtlu
 \end{lstlisting}
 \end{parexammar}
 
-Other font controlling methods are like what we have talked about in subsection \ref{subsec:fonts}. For example, \verb=\mathrm= gives font in \textrm{Roman} family, and \verb=\mathbf= gives font in \textbf{bold} series.
+其他字体控制方法如我们在 \ref{subsec:fonts} 小节中讨论过的。 例如，\verb=\mathrm= 给出\textrm{Roman} 家族的字体，而\verb=\mathbf= 给出\textbf{bold} 系列的字体。
 \begin{parexammar}{.45\textandmarginlen}{
 \[
 \mathrm{Like normal text} \quad \mathbf{bold}

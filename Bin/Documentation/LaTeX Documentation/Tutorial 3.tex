@@ -1,0 +1,220 @@
+\section{Tutorial 3: Yue Handling Floats}
+Yue is preparing her material for the monthly of math club. She wants to make her material interesting and easy to understand, so she utilizes many figures and tables.
+
+Figures, tables and many other things that occupy an (often large) area of random width and height are treated as \emph{floats} in \LaTeX{}. Floats are common in today's documents, yet they cause great troubles in typesetting. In this section, we will work along with Yue to see how floats are handled in \LaTeX{}.
+
+\subsection{Inserting Images}
+To insert images in \LaTeX{}, package graphicx (loaded by the template files) is a good option. It provides the \verb=\includegraphics= that accepts the input image filename and some optional specifiers.
+\begin{miniexammar}{.4\textandmarginlen}{
+\includegraphics[width=\textwidth]{assets/examplelogo.jpg}
+}
+\begin{lstlisting}
+\includegraphics[width=\textwidth]{assets/examplelogo.jpg}
+\end{lstlisting}
+\end{miniexammar}
+
+Yue soon finds out that simply using this command is not a good option, because if there is not enough vertical space for the image, it will be placed on the next page, leaving a large vacant area, which is quite ugly. Also, she is unable to provide the image with a caption or to reference it.
+
+So, Yue wraps the image with the figure environment that makes the image a \emph{figure}.
+\begin{miniexammar}{.45\textandmarginlen}{
+% figure with a caption cannot be placed inside a minipage, so we fake it here. 
+\includegraphics[width=\textwidth]{assets/examplelogo.jpg}
+\begin{center}
+\hypertarget{fakedcaption}{Figure 1: Example Logo}
+\end{center}
+Figure \hyperlink{fakedcaption}{1} shows the figure Yue uses.
+}
+\begin{lstlisting}
+\begin{figure}
+\includegraphics[width=\textwidth]{assets/examplelogo.jpg}
+\caption{Example Logo}
+\label{fig:example}
+\end{figure}
+Figure \ref{fig:example} shows the figure Yue uses.
+\end{lstlisting}
+\end{miniexammar}
+
+\LaTeX{} automatically gives a number to it so that Yue is able to reference it. Note that due to implementation reasons, \verb=\label= should only be placed immediately after a \verb=\caption= lest the reference be wrong.
+
+\subsection{Tables}
+Even if using figures does require an extra environment, it is still quite simple and Yue soon becomes familiar with it. Dealing with tables, however, is more complex in \LaTeX{}.
+
+To generate a table-like content in \LaTeX, Yue has to use special environments. tabular and array are two specific examples of them. In fact, the two environments are alike in most of the aspects, with one major difference being that array is often used in math mode.
+
+The syntax of array and tabular resembles the one of matrix environments used by Delilah, though here Yue has to explicitly specify the column behavior.
+\begin{miniexammar}{.4\textandmarginlen}{
+\begin{tabular}{|c|c|}
+\hline 
+Entry 1 & Entry 2\\
+\hline
+a & b\\
+\hline
+\end{tabular}
+}
+\begin{lstlisting}
+\begin{tabular}{|c|c|}
+\hline 
+Entry 1 & Entry 2\\
+\hline
+a & b\\
+\hline
+\end{tabular}
+\end{lstlisting}
+\end{miniexammar}
+
+Yue doesn't quite understand what \verb=|c|c|= means, so she searches on the Internet for this. It tells her that this argument passed to tabular specifies each column. The letter c tells tabular that the contents in this column should be centered. And two other alignment specifier l and r are available for ``left'' and ``right'', respectively. The vertical bar indicates that at this place a vertical line should be inserted (c.f. The \verb=\hline= command that instructs a horizontal line to be inserted at the top of the current row)
+
+The width of a column is determined by the width of the contents when either c,l, and r is given. Yue is able to control the width of a column by using another specifier ``p'', in which the content is left-aligned.
+\begin{miniexammar}{.4\textandmarginlen}{
+\begin{tabular}{|c|p{2cm}|}
+\hline 
+Entry 1 & Entry 2\\
+\hline
+a & b\\
+\hline
+\end{tabular}
+}
+\begin{lstlisting}
+\begin{tabular}{|c|p{2cm}|}
+\hline 
+Entry 1 & Entry 2\\
+\hline
+a & b\\
+\hline
+\end{tabular}
+\end{lstlisting}
+\end{miniexammar}
+
+When there is many columns with the same specifier, Yue can use this syntax \verb=*{num}{spe}= to repeat the specifiers, where num is the number of repetitions, and spe is the specifier.
+\begin{miniexammar}{.4\textandmarginlen}{
+\begin{tabular}{|*{7}{c|}}
+\hline 
+a&a&a&a&a&a&a\\
+\hline
+a&a&a&a&a&a&a\\
+\hline
+\end{tabular}
+}
+\begin{lstlisting}
+\begin{tabular}{|*{7}{c|}}
+\hline 
+a&a&a&a&a&a&a\\
+\hline
+a&a&a&a&a&a&a\\
+\hline
+\end{tabular}
+\end{lstlisting}
+\end{miniexammar}
+
+Yue doesn't like line-separated tables because she considers them not tidy. She wants to use space to separate contents. She can use \verb=@{\hspace{}}= between column specifiers to specify the inter-column space and use \verb=\vspace{}= immediately before \verb=\\= to add extra space before the next row.
+\begin{miniexammar}{.4\textandmarginlen}{
+\begin{tabular}{c@{\hspace{1cm}}cc}
+a & b & b\\
+a & b & b\vspace{.5cm}\\
+c & d & d\vspace{.5cm}\\
+\end{tabular}
+}
+\begin{lstlisting}
+\begin{tabular}{c@{\hspace{1cm}}cc}
+a & b & b\\
+a & b & b\vspace{.5cm}\\
+c & d & d\vspace{.5cm}\\
+\end{tabular} 
+\end{lstlisting}
+\end{miniexammar}
+In fact, inside \verb=@{}= Yue can use not only spaces, but any other contents.
+\begin{miniexammar}{.45\textandmarginlen}{
+\begin{tabular}{c@{ <POLICE, stay away> }c}
+crime scene & people \\
+crime scene & people \\
+\end{tabular}
+}
+\begin{lstlisting}
+\begin{tabular}{c@{ <POLICE, stay away> }c}
+crime scene & people \\
+crime scene & people \\
+\end{tabular}
+\end{lstlisting}
+\end{miniexammar}
+
+Like the environment figure, the environment table is designed to accept a table-like content.
+\begin{miniexammar}{.4\textandmarginlen}{
+\begin{tabular}{cc}
+a & b \\
+c & d \\
+\end{tabular}
+\begin{center}
+\hypertarget{fakedcaptiontab}{Table 1: Example Table}
+\end{center}
+Table \hyperlink{fakedcaptiontab}{1} shows a table.
+}
+\begin{lstlisting}
+\begin{table}
+\begin{tabular}{cc}
+a & b \\
+c & d \\
+\end{tabular}
+\caption{Example Table}
+\label{tab:example}
+\end{table}
+Table \ref{tab:example} shows a table.
+\end{lstlisting}
+\end{miniexammar}
+
+Now that Yue understands how to manipulate table-like contents in \LaTeX{}, she soon resumes to her work. At some point, she has to create a super big table that contains at least 20 columns, and she finds that it sticks out of the page. When she tries to use \verb=\small= to reduce the size of the texts, she finds that she has to copy it for every entry of the table, which means hundreds times of repetition. To control the overall style, Yue needs to give the controlling commands between the beginning of table and the beginning of tabular.
+
+\begin{miniexammar}{.5\textandmarginlen}{
+{
+\tiny
+\begin{tabular}{|*{14}{c|}}
+\hline 
+a&a&a&a&a&a&a&a&a&a&a&a&a&a\\
+\hline
+a&a&a&a&a&a&a&a&a&a&a&a&a&a\\
+\hline
+\end{tabular}
+}
+}
+\begin{lstlisting}
+\begin{table}
+\small
+\begin{tabular}{|*{14}{c|}}
+\hline 
+a&a&a&a&a&a&a&a&a&a&a&a&a&a\\
+\hline
+a&a&a&a&a&a&a&a&a&a&a&a&a&a\\
+\hline
+\end{tabular}
+\end{table}
+\end{lstlisting}
+\end{miniexammar}
+
+\subsection{Placement of Floats}
+Yue used to use Microsoft Word, which places floats wherever the user wants to place it at. Everything had been fine since she had turned to \LaTeX for some time, but now Yue has a problem. A figure ``disappeared'' from the output. After checking her code and the output again and again, she accidentally finds that the figure appears in the next page. This really confuses her. Due to the internal algorithm of \TeX, it is technically impossible to arrange every float at where the user wants to place them. According to \textit{the \LaTeX{} Companion},
+\begin{quotation}
+``Floats are often problematic in the present version of \LaTeX, because the system was developed at a time when documents contained considerably less graphical material than they do today.''
+\end{quotation}
+
+Yet \LaTeX{} does give some option to allow the Yue to control the placement of a float to some extend. For a figure or table environment, Yue is able to pass to it an optional argument that specify the desired placement. There are five placement specifiers and they can be combined together in any order.
+\begin{description}
+\item[!] Ignores some \LaTeX{} limitation\footnote{\LaTeX{} has some limitations when it tries to place floats. For example, if the height of a float is larger than a degree of page height, then it cannot be placed at the bottom of a page.} when trying to place the float.
+\item[h] Tries to place the float exactly at where the the environment is issued. If the attempt fails and no other specifier other that ! is given, the specifier will be changed to t.
+\item[t] Tries to place the float at the top of the page.
+\item[b] Tries to place the float at the bottom of the page.
+\item[p] Tries to place the float at a float page (a page that is generated by \LaTeX{} to place floats)
+\end{description}
+\LaTeX{} tries to place a float according to the specifiers in the order of the above list from the top to the bottom. Generally all floats of a document can be handled properly. But should a float proves impossible to handle, the author should adjust (probably reduce) its width and height.
+
+\subsection{Table of Floats}
+As mentioned at the beginning, in Yue's material, there are many floats. She wonders if there is a way to provide a quick reference to them.
+
+Like \verb=\tableofcontents=, \LaTeX{} provides the following two commands to print a list of all figures and a list of all tables used in a document, respectively.
+\begin{verbatim}
+\listoffigures and \listoftables
+\end{verbatim}
+The name of a float that appears on the list is defined by the caption of the float. If the captions appears to be too long, Yue can pass to caption an optional argument that will instead be shown on the list. Also, don't forget to compile the file at least twice for the lists to show properly.
+
+\subsection{A Suggestion About Images}
+Yue is suggested to use vector graph for images, as vector graph is lossless when the image is scaled along with the output file.
+
+There are several packages that enables drawing images directly in \LaTeX{}, yet they all require great efforts. It is suggested to use modern tools to generate appropriate images (e.g. Mathematica is able to export the math plots drawn.).

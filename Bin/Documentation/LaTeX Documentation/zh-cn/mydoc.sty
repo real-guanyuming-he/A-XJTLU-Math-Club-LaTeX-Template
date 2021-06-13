@@ -1,0 +1,164 @@
+\ProvidesPackage{mydoc}
+
+\RequirePackage{calc}
+
+\newlength{\examtop}
+\newlength{\exambot}
+\newlength{\exammid}
+
+\setlength{\examtop}{.5em}
+\setlength{\exambot}{.6em}
+\setlength{\exammid}{5pt}
+
+%----------------------should not be used now--------------------------------------
+\newcounter{prevsectioningcntval}
+\newcommand{\preminisectioning}[1]{
+\setcounter{prevsectioningcntval}{\value{#1}}% store the prev counter val
+\setcounter{#1}{0}% reset the counter val
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-2}}% prevent the mini sectioning from appearing in toc
+}
+\newcommand{\postminisectioning}[1]{
+\setcounter{#1}{\value{prevsectioningcntval}}% restore sec cnt
+\addtocontents{toc}{\protect\setcounter{tocdepth}{3}}% restore toc depth.
+}
+
+% 1: command name 2: name 3: depth
+% defines the sectioning commands to be used in the minipage of examples.
+\newcommand{\minipagesectioning}[3]%
+{%
+\newcommand{#1}{%
+\preminisectioning{#2}%
+\@startsection{#2}{#3}{0mm}{0pt}{1pt}% a very small afterskip to make sure that it is in display style
+{\bfseries\Large}%
+}
+}% When finished calling this command, one must call \postminisectioning{#2} to restore the sectioning cnt! It is not put at the end of the cmd def because of strange errors.
+
+% Depths for book
+\minipagesectioning{\minichapter}{chapter}{0}
+\minipagesectioning{\minisection}{section}{1}
+\minipagesectioning{\minisubsection}{subsection}{2}
+\minipagesectioning{\minisubsubsection}{subsubsection}{3}
+\minipagesectioning{\miniparagraph}{paragraph}{4}
+\minipagesectioning{\minisubparagraph}{subparagraph}{5}
+%----------------------should not be used now--------------------------------------
+
+% Examples may be allowed to stick into margins, so we define two length here
+% their values are defined later, because we cannot decide the page layout in the package file
+\newlength{\textandmarginlen}
+\newlength{\textonlylen}
+
+% Boxes that stick into the margin raise ``overfull hbox'' warnings.
+% To suppress these, set the length \hfuzz to a bigger value
+% Note that in XeLaTeX the warnings may still be shown.
+\newlength{\originalhfuzz}
+\setlength{\originalhfuzz}{\hfuzz}
+\newcommand{\enlargehfuzz}{\setlength{\hfuzz}{\maxdimen}}
+\newcommand{\restorehfuzz}{\setlength{\hfuzz}{\originalhfuzz}}
+
+\newlength{\safeverblen} \newsavebox{\safeverbbox}
+% used to save verbatim like contents inside a box
+% #1: width
+\newenvironment{safeverb}[1]{%
+\setlength{\safeverblen}{#1}%
+\begin{lrbox}{\safeverbbox}%
+\begin{minipage}[c]{\safeverblen}%
+}%
+{%
+\end{minipage}%
+\end{lrbox}%
+\usebox{\safeverbbox}%
+}
+
+% verbatim like contents cannot be used inside a place where command/environment parameters are being parsed, so we must put them inside a environment.
+
+% 1: left width 2: full width (right width =full - left - mid sep) 3: left content
+% right content is included inside this env.
+\newenvironment{Internalminiexam}[3]%
+{%
+\vspace{\examtop}%
+\par\noindent% no par indent
+%
+\begin{minipage}[c]{#1}%
+\sffamily%
+#3%
+\end{minipage}%
+%
+\hspace{\exammid}% mid sep
+%
+\begin{safeverb}{#2-#1-\exammid}%
+}%
+{%
+\end{safeverb}%
+\vspace{\exambot}%
+}
+
+% 1: left width 2: full width (right width =full - left - mid sep) 3: left content
+% right content is included inside this env.
+\newenvironment{Internalparexam}[3]%
+{%
+\vspace{\examtop}%
+\par\noindent% no par indent
+%
+\parbox[c]{#1}{\sffamily #3}%
+%
+\hspace{\exammid}% mid sep
+%
+\begin{safeverb}{#2-#1-\exammid}%
+}%
+{%
+\end{safeverb}%
+\vspace{\exambot}%
+}
+
+
+% 1: left width 2: left content
+\newenvironment{miniexammar}[2]
+{\begin{Internalminiexam}{#1}{\textandmarginlen}{#2}%
+\enlargehfuzz}%
+{\end{Internalminiexam}\restorehfuzz}
+% 1: left width 2: left content
+\newenvironment{miniexamtext}[2]
+{\begin{Internalminiexam}{#1}{\textonlylen}{#2}}%
+{\end{Internalminiexam}}
+
+% 1: left width 2: left content
+\newenvironment{parexammar}[2]
+{\begin{Internalparexam}{#1}{\textandmarginlen}{#2}%
+\enlargehfuzz}%
+{\end{Internalparexam}\restorehfuzz}
+
+% 1: left width 2: left content
+\newenvironment{parexamtext}[2]
+{\begin{Internalparexam}{#1}{\textonlylen}{#2}}%
+{\end{Internalparexam}}
+	
+\newcommand{\faketoc}{%
+{\LARGE \bfseries Contents}%
+\par \noindent
+\vspace{.6cm}%
+}
+% 1: number 2: content 3: page
+\newcommand{\fakecontentsline}[3]{%
+\hspace{1.5em}#1\hspace{2em}#2\dotfill#3%
+}
+
+%#1 number #2 indent #3 content #4 before skip #5 end skip
+\newcommand{\fakesectioning}[5]
+{%
+\vspace{#4}
+\par\noindent%
+\hspace{#2}{\bfseries\Large #1}\hspace{1.5em}%
+{\bfseries\Large #3}\hfill%
+\vspace{#5}%
+\par\noindent
+}
+% with default value #2 number #3 content
+\newcommand{\fakesectioningdef}[2]{\fakesectioning{#1}{0pt}{#2}{10pt}{15pt}}
+
+\newcommand{\showwidth}[1]{\rule{.3pt}{.8em}\rule{#1}{.3pt}\rule{.3pt}{.8em}}
+
+% calculate lengths
+\AtBeginDocument{%
+\setlength{\textonlylen}{\textwidth}%
+\setlength{\textandmarginlen}{\textwidth+\marginparsep+\marginparwidth}
+}
