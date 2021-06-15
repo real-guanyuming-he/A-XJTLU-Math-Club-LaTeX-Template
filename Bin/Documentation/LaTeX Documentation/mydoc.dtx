@@ -1,30 +1,14 @@
-%%
-%% This is file `mydoc.sty',
-%% generated with the docstrip utility.
-%%
-%% The original source files were:
-%%
-%% mydoc.dtx 
-%% 
-%% IMPORTANT NOTICE:
-%% 
-%% For the copyright see the source file.
-%% 
-%% Any modified versions of this file must be renamed
-%% with new filenames distinct from mydoc.sty.
-%% 
-%% For distribution of the original source see the terms
-%% for copying and modification in the file mydoc.dtx.
-%% 
-%% This generated file may be distributed as long as the
-%% original source files, as listed above, are part of the
-%% same distribution. (The sources need not necessarily be
-%% in the same archive or directory.)
+%\section{Package mydoc}
+%This package is only used for writing the documentation.
 
+%    \begin{macrocode}
 \ProvidesPackage{mydoc}
 
 \RequirePackage{calc}
+%    \end{macrocode}
 
+% Lengths used for presenting examples
+%    \begin{macrocode}
 \newlength{\examtop}
 \newlength{\exambot}
 \newlength{\exammid}
@@ -32,16 +16,30 @@
 \setlength{\examtop}{.5em}
 \setlength{\exambot}{.6em}
 \setlength{\exammid}{5pt}
+%    \end{macrocode}
 
+% Examples may be allowed to stick into margins, so we define two length here to represent textwidth and the length of text plus margin. Their values are defined later, because we cannot decide the page layout in the package file.
+%    \begin{macrocode}
 \newlength{\textandmarginlen}
 \newlength{\textonlylen}
+%    \end{macrocode}
 
+% Boxes that stick into the margin raise ``overfull hbox'' warnings. To suppress these, set the length hfuzz to a bigger value. Note that in XeLaTeX the warnings may still be shown.
+%    \begin{macrocode}
 \newlength{\originalhfuzz}
 \setlength{\originalhfuzz}{\hfuzz}
 \newcommand{\enlargehfuzz}{\setlength{\hfuzz}{\maxdimen}}
 \newcommand{\restorehfuzz}{\setlength{\hfuzz}{\originalhfuzz}}
+%    \end{macrocode}
 
+
+% used to save verbatim like contents inside a box
+%    \begin{macrocode}
 \newlength{\safeverblen} \newsavebox{\safeverbbox}
+%    \end{macrocode}
+%\begin{environment}{safeverb}
+% 1: width
+%    \begin{macrocode}
 \newenvironment{safeverb}[1]{%
 \setlength{\safeverblen}{#1}%
 \begin{lrbox}{\safeverbbox}%
@@ -52,36 +50,60 @@
 \end{lrbox}%
 \usebox{\safeverbbox}%
 }
+%    \end{macrocode}
+%\end{environment}
 
+
+
+%\begin{environment}{Internalminiexam}
+% verbatim like contents cannot be used inside a place where command/environment parameters are being parsed, so we must put them inside a environment.
+% 1: left width 2: full width (right width $=$ full $-$ left $-$ mid sep) 3: left content. Right content is included inside this env.
+%    \begin{macrocode}
 \newenvironment{Internalminiexam}[3]%
 {%
 \vspace{\examtop}%
 \par\noindent% no par indent
+%
 \begin{minipage}[c]{#1}%
 \sffamily%
 #3%
 \end{minipage}%
+%
 \hspace{\exammid}% mid sep
+%
 \begin{safeverb}{#2-#1-\exammid}%
 }%
 {%
 \end{safeverb}%
 \vspace{\exambot}%
 }
+%    \end{macrocode}
+%\end{environment}
 
+%\begin{environment}{Internalparexam}
+% 1: left width 2: full width (right width $=$ full $-$ left $-$ mid sep) 3: left content. Right content is included inside this env.
+%    \begin{macrocode}
 \newenvironment{Internalparexam}[3]%
 {%
 \vspace{\examtop}%
 \par\noindent% no par indent
+%
 \parbox[c]{#1}{\sffamily #3}%
+%
 \hspace{\exammid}% mid sep
+%
 \begin{safeverb}{#2-#1-\exammid}%
 }%
 {%
 \end{safeverb}%
 \vspace{\exambot}%
 }
+%    \end{macrocode}
+%\end{environment}
 
+
+% 1: left width 2: left content
+%    \begin{macrocode}
 \newenvironment{miniexammar}[2]
 {\begin{Internalminiexam}{#1}{\textandmarginlen}{#2}%
 \enlargehfuzz}%
@@ -95,18 +117,28 @@
 \enlargehfuzz}%
 {\end{Internalparexam}\restorehfuzz}
 
+% 1: left width 2: left content
 \newenvironment{parexamtext}[2]
 {\begin{Internalparexam}{#1}{\textonlylen}{#2}}%
 {\end{Internalparexam}}
+%    \end{macrocode}
 
+% Fake commands becuase some commands cannot or should not be used in the examples	
+%    \begin{macrocode}
 \newcommand{\faketoc}{%
 {\LARGE \bfseries Contents}%
 \par \noindent
 \vspace{.6cm}%
 }
+%    \end{macrocode}
+% 1: number 2: content 3: page
+%    \begin{macrocode}
 \newcommand{\fakecontentsline}[3]{%
 \hspace{1.5em}#1\hspace{2em}#2\dotfill#3%
 }
+%    \end{macrocode}
+%1 number 2 indent 3 content 4 before skip 5 end skip
+%    \begin{macrocode}
 \newcommand{\fakesectioning}[5]
 {%
 \vspace{#4}
@@ -116,13 +148,20 @@
 \vspace{#5}%
 \par\noindent
 }
+%    \end{macrocode}
+%    \begin{macrocode}
+% with default value 2 number 3 content
 \newcommand{\fakesectioningdef}[2]{\fakesectioning{#1}{0pt}{#2}{10pt}{15pt}}
+%    \end{macrocode}
+%Show lengths in \LaTeX
+%    \begin{macrocode}
 \newcommand{\showwidth}[1]{\rule{.3pt}{.8em}\rule{#1}{.3pt}\rule{.3pt}{.8em}}
+%    \end{macrocode}
 
+% Calculate lengths at the beginning of the doc
+%    \begin{macrocode}
 \AtBeginDocument{%
 \setlength{\textonlylen}{\textwidth}%
 \setlength{\textandmarginlen}{\textwidth+\marginparsep+\marginparwidth}
 }
-\endinput
-%%
-%% End of file `mydoc.sty'.
+%    \end{macrocode}

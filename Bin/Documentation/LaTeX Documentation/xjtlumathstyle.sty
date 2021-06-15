@@ -1,56 +1,59 @@
-% Copyright (C) 2021-2021 Guanyuming He. This file is licensed under the MIT license.
-
-% Indentification
+%%
+%% This is file `xjtlumathstyle.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% xjtlumath.dtx  (with options: `style')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from xjtlumathstyle.sty.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file xjtlumath.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
 \ProvidesPackage{xjtlumathstyle}[2021 by Guanyuming He]
 \NeedsTeXFormat{LaTeX2e}
 
-% Execution of Options
-
-% Package Loading
 \RequirePackage{xjtlubase}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 
-% Main Body
-
-% Calculus part
-
-% Improved 'd' in integrals
 \newcommand{\dd}{\ensuremath{\,\mathrm{d}}}
 \newcommand{\dx}{\ensuremath{\dd x}}
 
-% New name for \nabla in gradients
 \newcommand{\grad}{\ensuremath{\nabla}}
 
-% Simplify writing FRactional DerivaTives (#1 function #2 variable)
 \newcommand{\frdt}[2][f]{\ensuremath{\frac{\mathrm{d}#1}{\mathrm{d}#2}}}
 \newcommand{\frpdt}[2][f]{\ensuremath{\frac{\grad #1}{\grad #2}}}
 
-% Infinite series (#1: sequence #2: subscript #3: starting count)
 \newcommand{\infseries}[3][a]{\ensuremath{\sum_{#2=#3}^{\infty}{#1_{#2}}}}
 
-% Multiple integrals
 \newcommand{\dxdy}{\ensuremath{\dx \dd y}}
 \newcommand{\dxdydz}{\ensuremath{\dx \dd y \dd z}}
-% Polar coordinates
 \newcommand{\drdt}{\ensuremath{\dd r \dd \theta}}
-% Cylindrical
 \newcommand{\dzdrdt}{\ensuremath{\dd z \dd r \dd \theta}}
-% Spherical
 \newcommand{\drdtdp}{\ensuremath{\dd \rho \dd \theta \dd \phi}}
 
-% Linear algebra part
 
-% Bold font for vectors
 \renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
 
-% operators
 \DeclareMathOperator{\Nul}{Nul}
 \DeclareMathOperator{\Span}{Span}
 
-% Miscellaneous
 \newcommand{\setr}{\ensuremath{\mathbb{R}}}
 \newcommand{\setq}{\ensuremath{\mathbb{Q}}}
 \newcommand{\setz}{\ensuremath{\mathbb{Z}}}
 \newcommand{\setn}{\ensuremath{\mathbb{N}}}
 \newcommand{\setnp}{\ensuremath{\mathbb{N}^+}}
+\endinput
+%%
+%% End of file `xjtlumathstyle.sty'.

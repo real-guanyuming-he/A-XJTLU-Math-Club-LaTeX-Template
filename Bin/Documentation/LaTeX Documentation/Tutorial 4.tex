@@ -1,0 +1,136 @@
+\section{Tutorial 4: The Story of ZiYou and Abigail} % ZiYou for 子由
+ZiYou and Abigail are the team leaders of the material about Calculus for the final exam. As team leaders, they have to deal with more problems than their colleagues. In this section, we will know about how ZiYou and Abigail manage to solve these problems and how their affection of each other grows.
+
+\subsection{Managing Notes In \LaTeX}
+In a review to the work of one of the team members, ZiYou finds several places that may not be clear enough for the readers. He decides to add some description to these unclear texts. These descriptions should not defer the reading of the main text, so ZiYou adjudicates on making them \emph{notes}. Two general ways for adding notes in \LaTeX{} are using \emph{footnotes} and using \emph{marginpars}.
+
+A footnote in \LaTeX{} provides an annotation for a piece of text in the footer of the current page, and generates a number of the note which will appear as the superscript of the text being annotated. To use footnotes, ZiYou uses the command \verb=\footnote=.
+\begin{miniexammar}{.55\textandmarginlen}{
+This is something unclear\footnote{This means that ...}. And some other texts are here.
+}
+\begin{lstlisting}
+This is something unclear\footnote{This means that ...}. And some other texts are here.
+\end{lstlisting}
+\end{miniexammar}
+
+Different from ZiYou, Abigail prefers to use marginpars for annotation. A marginpar appears in the margin of the current page, but does not possess a number like a footnote does.
+\begin{miniexammar}{.6\textandmarginlen}{
+% We have to fake a margin par here.
+\parbox{.68\textwidth}{This is something unclear. And some other texts are here.} \hspace{.03\textwidth}
+\parbox{.27\textwidth}{That is, we have to ...}
+}
+\begin{lstlisting}
+This is something unclear\marginpar{That is, we have to ...}. And some other texts are here.
+\end{lstlisting}
+\end{miniexammar}
+
+A marginpar appears in the margin, and is at the same height as the text where the marginpar is given. When Abigail sees that ZiYou uses footnotes rather than marginpars, she asks him to change them because she thinks that marginpars are better. Certainly ZiYou doesn't agree with her, but he confers with what she claims, that the noting styles should agree with each other in a document.
+
+To give a resolution about what noting style is to be used, ZiYou suggests that they play Tic Tac Toe, and Abigail thinks this is a good idea. After a few minutes, Abigail narrowly wins the game. ZiYou jokes that maybe she should let him win the next time, whereupon Abigail smilingly replies, ``That remains to be seen''. Nevertheless, she has a dim feeling that ZiYou deliberately lets her be the winner, but can't prove it from ZiYou's regretful expression.
+
+\subsection{Merging Works Of The Team}
+ZiYou and Abigail only need to collect the chapter.tex from the team members. They rename the files according to each person in a way that they can easily identify who is responsible for each file. After that, they input each file into the chapter.tex of an empty template. The final output can then be generated from the encapsulation.tex of the template.
+
+Directly copying the contents is not a good option for inputting the files. ZiYou is about to search this on the Internet when Abigail discovers in the encapsulation.tex that the chapter.tex is directed into this file by the command \verb=\input=. The following code shows what is written in encapsulation.tex.
+\begin{lstlisting}
+\input{chapter.tex}
+\end{lstlisting}
+The argument passed to this command is the relative path of the target file. Abigail doesn't know what the term relative path means, so ZiYou, who has certain knowledge in computer science, explains to her that, the relative directory is the path of a file relative to the file in which the path is used. In this example, the file in which the relative directory is used is encapsulation.tex, and as a consequence of the two files being in the same folder, the relative directory of the chapter.tex is simply its name. If ZiYou and Abigail decide to put the files of the team members into a folder named Files for organization, then the directory should contain the folder's name plus a \verb=/= or \verb=\=, depending on the file system, at the beginning.
+
+Not until they have completed the inputting had ZiYou had a glimpse at the search result on the Internet, where he finds another command, \verb=\include=. After seeing this webpage in detail, he then tells Abigail that \verb=\include= is a better choice here, for it somehow improves the compilation speed. Abigail has no clue about what compilation is and isn't interested in such technical stuffs, but she trusts ZiYou. She also kind of likes it when ZiYou, patiently and tenderly, explains what she doesn't understand to her. So she pretends to be curious and asks ZiYou to explain compilation to her.
+
+So the final form of their chapters.tex is like this:
+\begin{lstlisting}
+\include{Files/The first file}
+
+\include{Files/The second file}
+
+\include{Files/The third file}
+...
+\end{lstlisting}
+Note that the file extension (.tex) is not allowed to be used in \verb=\include=, while it can be used in \verb=\input=. Also, they have to make sure that the team members have not taken advantage of \verb=\include=, as it cannot be used in a file that is included by another. Fortunately, they can ascertain it since none of them knows about the command.
+
+\subsection{Background, Headers, and Footers}
+ZiYou and Abigail notice that the template for materials automatically adds the background, and the header and footer for each page. The encapsulation.tex loads the package background for background, and the package fancyhdr for headers and footers.
+
+The headers and footers are set in the encapsulation.tex by the following code: (A line begins with a \verb=%= is \emph{commented}, so it will have no effect on the output .pdf file.)
+\begin{lstlisting}
+% Define the header and footer for pages.
+
+% Place the number of the current page.
+\fancyhead[LEH,ROH]{\bfseries\thepage}
+
+% Beautify the display of chapter and section marks.
+\renewcommand{\chaptermark}[1]{%
+\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{%
+\markright{\thesection\ #1}}
+
+\fancyhead[LOH]{\bfseries\rightmark}
+\fancyhead[REH]{\bfseries\leftmark}
+
+% Add copyright in the footer
+\fancyfoot[COF,CEF]{\bfseries\copyright{} The XJTLU Math Club -- All rights reserved}
+\end{lstlisting}
+The header is controlled by the command \verb=\fancyhead= and the footer is controlled by the command \verb=\fancyfoot=. By inspecting the optional arguments, ZiYou makes a guess that L and R represent left and right, E and O represent even and odd (page number), and H and F represent header and footer, respectively. A look into the documentation of fancyhdr confirms this. He asks Abigail if she likes the page style. Abigail thinks that the author has a good taste, so they decide not to change this.
+
+The background is set to the logo of math club. In fact, adding this graph somehow makes the document ugly, and even I didn't understand why this must be added to all materials. The head of the department at that time told me that this is a defense for those who use the materials in a prohibited way.
+
+I really hope that this environment can improve to a state that even the materials are distributed by the most free licenses, there will be no one to steal our intelligent property.
+
+\subsection{Index And Bibliography}
+ZiYou and Abigail would like to listen to the readers' opinions about the previous materials so that they can refine the coming one according to them. A few number of the readers pointed out that it took them a lot of efforts to find specific terms in the materials and they would appreciate it if a list of important terms is added.
+
+Abigail recalls that once when she tried to find something in a calculus textbook's appendix, she flipped the pages too much and turned to a section called Index, where terms are listed according to their pages. So ZiYou makes a search on the Internet and found that Indexing in \LaTeX{} can be easily done by a few commands.
+
+First, for any important terms that they want to list in the Index page, they mark it with the command \verb=\index=. To print the Index page, the command \verb=\printindex= needs to be called. In the encapsulation.tex, simply uncomment the relating lines of code to do that. Finally, for the Index page to be printed, they have to, first, run \LaTeX{} once on encapsulation.tex, then, run MakeIndex once on the file, and finally, run \LaTeX{} twice on the file. The following example show the result of using Index.
+\begin{miniexammar}{.35\textandmarginlen}{
+\section*{Index}
+limit, vi, 3\\
+derivative, 3-5
+}
+\begin{lstlisting}
+% At page vi
+\index{limit}
+% At page 3
+\index{limit}
+\index{derivative}
+% At page 4
+\index{derivative}
+% At page 5
+\index{derivative}
+\end{lstlisting}
+\end{miniexammar}
+
+ZiYou makes definite integral and indefinite integral two separate index entries, while Abigail argues that they should be under the same term integral. To use subterms, the following syntax should be applied.
+\begin{miniexammar}{.4\textandmarginlen}{
+\section*{Index}
+integral, 5
+\par \hspace{2em} definite integral, 11
+\par \hspace{2em} indefinite integral, 7
+}
+\begin{lstlisting}
+% At page 5
+\index{integral}
+% At page 7
+\index{integral!definite integral}
+% At page 11
+\index{integral!indefinite integral}
+\end{lstlisting}
+\end{miniexammar}
+
+Abigail remembers that for the sake of academic integrity, they should add reference for each work of other people. \textsc{bib}\TeX{} is a good tool handling references (bibliographies). To use this tool, they have to prepare a \textsc{bib}\TeX{} database. This is a file with the extension .bib, in which entries are contained. Filling in the entries is a tedious work, but fortunately most academic websites provides the facility to allow an user to directly download a .bib file for the source he wants to use. The following code shows a typical database entry:
+\begin{lstlisting}
+@article{may1979alpha,
+	title="Alpha-particle-induced soft errors in dynamic memories",
+	author="T.C. {May} and M.H. {Woods}",
+	journal="IEEE Transactions on Electron Devices",
+...
+}
+\end{lstlisting}
+ZiYou and Abigail need not to worry about the details in the entry. The only thing they need to remember is the label of the entry, the one immediately after the \verb={=, because it is to be used in the \verb=\cite= command to produce a reference to that source. Each source that is referenced in the document appears in the Bibliography page, which is controlled by the two following commands:
+\begin{lstlisting}
+\bibliography{file-list}
+\bibliographystyle{style}
+\end{lstlisting}
+, where file-list is a list of database files, and style is the bibliography style according to which the bibliography is to be printed. \url{https://www.overleaf.com/learn/latex/Bibtex_bibliography_styles} shows all predefined \textsc{bib}\TeX{} styles.

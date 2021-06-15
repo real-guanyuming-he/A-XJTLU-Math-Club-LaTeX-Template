@@ -1,0 +1,57 @@
+\documentclass{book}
+
+\usepackage{xjtlumaththm}
+\usepackage{xjtlumathstyle}
+
+\usepackage{fancyhdr}
+
+% Define the header and footer for pages.
+
+% Place the number of the current page.
+\fancyhead[LEH,ROH]{\bfseries\thepage}
+
+% Beautify the display of chapter and section marks.
+\renewcommand{\chaptermark}[1]{%
+\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{%
+\markright{\thesection\ #1}}
+
+\fancyhead[LOH]{\bfseries\rightmark}
+\fancyhead[REH]{\bfseries\leftmark}
+
+% Add copyright in the footer
+\fancyfoot[COF,CEF]{\bfseries\copyright{} The XJTLU Math Club -- All rights reserved}
+
+\usepackage{graphicx}
+\graphicspath{{../Assets/}}
+\usepackage{background}
+
+%% Enable this if you want to use index
+%\makeindex
+\begin{document}
+\backgroundsetup{contents={}}
+\pagenumbering{roman}
+\pagestyle{plain}
+\tableofcontents
+
+\cleardoublepage
+\backgroundsetup{contents=\includegraphics{bg.jpg},angle=0,scale=0.8,opacity=0.1}
+\pagenumbering{arabic}
+\pagestyle{fancy}
+\input{chapters.tex}
+
+%% Enable this if you want to use index
+%\cleardoublepage
+%\addcontentsline{toc}{chapter}{Index}
+%\fancyhead[LOH]{\bfseries INDEX}
+%\fancyhead[REH]{\bfseries INDEX}
+%\printindex
+
+%% Enable this if you want to use bibliography
+%\cleardoublepage
+%\fancyhead[LOH]{\bfseries BIBLIOGRAPHY}
+%\fancyhead[REH]{\bfseries BIBLIOGRAPHY}
+%\bibliographystyle{alpha}
+%\bibliography{bibmain.bib}
+%\addcontentsline{toc}{chapter}{Bibliography}
+\end{document}
