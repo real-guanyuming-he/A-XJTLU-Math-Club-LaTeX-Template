@@ -1,5 +1,5 @@
 %\section{Package xjtlubase}
-%This packages is the base for all components of xjtlumath. 
+%This packages is the base for some components of xjtlumath. 
 %<*base>
 %    \begin{macrocode}
 \ProvidesPackage{xjtlubase}[2021 by Guanyuming He]
@@ -42,7 +42,7 @@
 %    \end{macrocode}
 
 % \begin{environment}{\newmdthmenv}
-% This boolean is used for determine if the document is writing in English or in Chinese. True for English, false for Chinese. The default value is true.
+% This environment is used to create thm environments using package mdframed.
 %    \begin{macrocode}
 \newcommand{\newmdthmenv}[3]{%
 % #1 caption
@@ -161,3 +161,32 @@ frametitle={%
 \newcommand{\setnp}{\ensuremath{\mathbb{N}^+}}
 %    \end{macrocode}
 %</style>
+%\section{Package xjtlumaterial}
+% This package defines some styles and also refines some commands for material writings.
+%<*material>
+%    \begin{macrocode}
+\ProvidesPackage{xjtlumaterial}[2021 by Guanyuming He]
+\NeedsTeXFormat{LaTeX2e}
+%    \end{macrocode}
+
+%\begin{macro}{\cleardoublepage}
+%Renew the command to add ``This page is intentionally left blank'' for any empty pages added.
+%
+%    \begin{macrocode}
+\renewcommand{\cleardoublepage}{\clearpage%
+\if@twoside%
+	\ifodd\c@page\else%
+    \vspace*{5cm}
+    \begin{center}
+        This page is intentionally left blank.
+    \end{center}
+    \thispagestyle{empty}
+    \newpage
+    	\if@twocolumn%
+    	\hbox{}\newpage%
+    	\fi%
+    \fi%
+\fi}
+%    \end{macrocode}
+%\end{macro}
+%</material>

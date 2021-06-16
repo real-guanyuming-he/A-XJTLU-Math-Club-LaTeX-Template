@@ -1,0 +1,42 @@
+%%
+%% This is file `xjtlumaterial.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% xjtlumath.dtx  (with options: `material')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from xjtlumaterial.sty.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file xjtlumath.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+\ProvidesPackage{xjtlumaterial}[2021 by Guanyuming He]
+\NeedsTeXFormat{LaTeX2e}
+
+\renewcommand{\cleardoublepage}{\clearpage%
+\if@twoside%
+\ifodd\c@page\else%
+    \vspace*{5cm}
+    \begin{center}
+        This page is intentionally left blank.
+    \end{center}
+    \thispagestyle{empty}
+    \newpage
+     \if@twocolumn%
+     \hbox{}\newpage%
+     \fi%
+    \fi%
+\fi}
+\endinput
+%%
+%% End of file `xjtlumaterial.sty'.

@@ -83,7 +83,7 @@ ZiYou and Abigail would like to listen to the readers' opinions about the previo
 
 Abigail recalls that once when she tried to find something in a calculus textbook's appendix, she flipped the pages too much and turned to a section called Index, where terms are listed according to their pages. So ZiYou makes a search on the Internet and found that Indexing in \LaTeX{} can be easily done by a few commands.
 
-First, for any important terms that they want to list in the Index page, they mark it with the command \verb=\index=. To print the Index page, the command \verb=\printindex= needs to be called. In the encapsulation.tex, simply uncomment the relating lines of code to do that. Finally, for the Index page to be printed, they have to, first, run \LaTeX{} once on encapsulation.tex, then, run MakeIndex once on the file, and finally, run \LaTeX{} twice on the file. The following example show the result of using Index.
+First, for any important terms that they want to list in the Index page, they mark it with the command \verb=\index=. To print the Index page, the command \verb=\printindex= needs to be called, and before the document environment the command \verb=\makeindex= should be called. In the encapsulation.tex, simply uncomment the relating lines of code to do that. Finally, for the Index page to be printed, they have to, first, run \LaTeX{} once on encapsulation.tex, then, run MakeIndex once on the file, and finally, run \LaTeX{} twice on the file. The following example show the result of using Index.
 \begin{miniexammar}{.35\textandmarginlen}{
 \section*{Index}
 limit, vi, 3\\
@@ -119,7 +119,7 @@ integral, 5
 \end{lstlisting}
 \end{miniexammar}
 
-Abigail remembers that for the sake of academic integrity, they should add reference for each work of other people. \textsc{bib}\TeX{} is a good tool handling references (bibliographies). To use this tool, they have to prepare a \textsc{bib}\TeX{} database. This is a file with the extension .bib, in which entries are contained. Filling in the entries is a tedious work, but fortunately most academic websites provides the facility to allow an user to directly download a .bib file for the source he wants to use. The following code shows a typical database entry:
+Abigail remembers that for the sake of academic integrity, they should add reference for each work of other people. B\textsc{ib}\TeX{} is a good tool handling references (bibliographies). To use this tool, they have to prepare a B\textsc{ib}\TeX{} database. This is a file with the extension .bib, in which entries are contained. Filling in the entries is a tedious work, but fortunately most academic websites provides the facility to allow an user to directly download a .bib file for the source he wants to use. The following code shows a typical database entry:
 \begin{lstlisting}
 @article{may1979alpha,
 	title="Alpha-particle-induced soft errors in dynamic memories",
@@ -133,4 +133,18 @@ ZiYou and Abigail need not to worry about the details in the entry. The only thi
 \bibliography{file-list}
 \bibliographystyle{style}
 \end{lstlisting}
-, where file-list is a list of database files, and style is the bibliography style according to which the bibliography is to be printed. \url{https://www.overleaf.com/learn/latex/Bibtex_bibliography_styles} shows all predefined \textsc{bib}\TeX{} styles.
+, where file-list is a list of database files, and style is the bibliography style according to which the bibliography is to be printed. \url{https://www.overleaf.com/learn/latex/Bibtex_bibliography_styles} shows all predefined B\textsc{ib}\TeX{} styles.
+
+\subsection{Twosided printing}
+Now ZiYou and Abigail have finished combining the separate documents and are planning a break after the work, but there is something more waiting for them.
+
+By default, when the documentclass is book, \LaTeX{} uses twosided printing. At first ZiYou and Abigail didn't notice this (they didn't know) until Abigail saw that the pages of the output are not aligned. That is, at one page the content sticks out to the left and at the next page the content sticks out to the right. Abigail doesn't want to trouble ZiYou again, so she makes a search herself and finds that this is what is called twoside, which is used particularly for books.
+
+Abigail tries to comprehend this by opening a book and inspecting its layout. She notices that a portion of the inner part\footnote{When one opens a book, the first page appearing on the right is numbered 1, and all odd pages appears on the right side have odd numbers as a consequence.} of the pages are stuck together to keep them form a book. She guesses that twoside leaves extra spaces for each page at the inner part. The result, however, contradicts with her instinct. On twoside mode, \LaTeX{} shrinks the inner part of each page. This is because \LaTeX{} wants to give more space for the margins that reside on the outer parts.
+
+ZiYou learns this from Abigail so they start another review for it. They soon find a problem. For table of contents and some other pages like preface, the template uses roman numbering. For the main text, the page numbering is changed to arabic. The layout of a page, however, is not decided by if it will appear on the left or right. Rather, it is entirely decided by the number of the page. If, say, the roman number ends at iii, then when the arabic number starts at 1, the corresponding page will appear on the left, which is a disaster. To solve this problem, ZiYou finds the command \verb=\cleardoublepage= that is designed for twoside mode. It ensures that the content after the command will appear at a page on the right by (possibly) adding a new page. The new page would be empty, of course. But Abigail thinks that a reader may misinterpret this as a sign of a printing failure. To explicitly identify this behavior, in xjtlumath (in precise, the subpackage xjtlumaterial loaded by the template), the command is renewed to add the sentence ``This page is intentionally left blank'' at each empty page this command adds.
+
+\subsection{An End Of Their Story}
+The very story of ZiYou and Abigail about their material writing comes to an end, yet as said in one old saying, ``An end is also a beginning,'' their other stories just begin. Abigail admires ZiYou's broad knowledge in computer science and enjoys it when ZiYou teaches her about it. ZiYou also is inspired by Abigail's energy, particularly in the working. He feels lucky to find such a girl as interesting and beautiful as Abigail, whose humor has made ZiYou laughing several times.
+
+So the two ordered seats in a romantic restaurant to celebrate their collaboration, while I, sitting alone in my dormitory, work hard to complete this documentation. Nevertheless, I hope you, the members of the math club in the future, can find not only knowledge and experience, but also love as ZiYou and Abigail do, except not in an imaginary story.

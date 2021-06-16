@@ -1,0 +1,28 @@
+\part{Templates}
+This part describes all templates given. They are inside the folder \verb|Templates|.
+\section{For Material Use}
+In this section all templates are made for writing materials. They are inside the folder \verb|For Materials|.
+\subsection{Book in English}
+The folder \verb=Book_en-us= gives the template for writing a material in English that is to be published as a book. Long materials should be prepared in the form of this template. It loads all xjtlumath packages so all functionalities provided by this package are available.
+
+At the beginning of the environment document, page numbering is changed to roman, page style is set to plain and the table of contents is given. You may add a title page before this. Also, other prefaces like acknowledge and dedication should be included here.
+
+The there begins the main text, where page numbering is arabic and the style is fancy, which is defined by several previous fancyhdr commands.
+
+At the end of the document environment, you may uncomment some commands to use index and bibliography (One command is required at the beginning for index).
+
+\subsection{Book in Chinese}
+The folder \verb=Book_zh-cn= gives the template for writing a material in Chinese that is to be published as a book. It is the same as the previous one except that the documentclass is ctexbook provided by package ctex for Chinese styles.
+
+\subsection{Article in English}
+The folder \verb=Article_en-us= gives the template for writing a material in English that is to be published as an article. Materials of moderate size should be prepared in the form of this template. It loads all xjtlumath packages so all functionalities provided by this package are available.
+
+It is similar to the template for English books, except that some options for twoside are adjusted to fit oneside.
+
+\subsection{Article in Chinese}
+The folder \verb=Article_zh-cn= gives the template for writing a material in Chinese that is to be published as an article. It is the same as the previous one except that the documentclass is ctexart provided by package ctex for Chinese styles.
+
+\section{For General Use}
+In this section all templates are made for general use. They are inside the folder \verb|General Use|.
+
+Currently they are the same as the templates for materials, except that they don't load the package xjtlumaterial.
