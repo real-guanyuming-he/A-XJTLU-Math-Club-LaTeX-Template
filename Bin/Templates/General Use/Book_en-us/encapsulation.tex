@@ -19,22 +19,16 @@
 \fancyhead[LOH]{\bfseries\rightmark}
 \fancyhead[REH]{\bfseries\leftmark}
 
-% Add copyright in the footer
-\fancyfoot[COF,CEF]{\bfseries\copyright{} The XJTLU Math Club -- All rights reserved}
-
 \usepackage{graphicx}
-\usepackage{background}
 
 %% Enable this if you want to use index
 %\makeindex
 \begin{document}
-\backgroundsetup{contents={}}
 \pagenumbering{roman}
 \pagestyle{plain}
 \tableofcontents
 
 \cleardoublepage
-\backgroundsetup{contents=\includegraphics{../Assets/bg.jpg},angle=0,scale=0.8,opacity=0.2}
 \pagenumbering{arabic}
 \pagestyle{fancy}
 \input{chapters.tex}

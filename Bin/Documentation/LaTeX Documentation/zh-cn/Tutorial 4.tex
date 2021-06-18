@@ -1,0 +1,150 @@
+\section{教程 4: 子由和 Abigail 的故事} % ZiYou for 子由
+子由和Abigail是期末考微积分教材的组长。 作为团队领导，他们要处理的问题比同事多。 在本节中，我们将了解子由和Abigail是如何解决这些问题的，以及他们之间的感情是如何增长的。
+
+\subsection{\LaTeX 里的注解管理}
+在对其中一位团队成员的工作进行审查时，子由发现了几个读者可能不太清楚的地方。 他决定为这些不清楚的文本添加一些描述。 这些描述不应耽误正文的阅读，因此子由裁定将它们制作为\emph{注解}。 在 \LaTeX{} 中添加注释的两种常用方法是使用 \emph{footnotes} 和使用 \emph{marginpars}。
+
+\LaTeX{} 中的脚注在当前页面页脚中为一段文本提供注释，并生成一个计数器，这计数器将显示为被注释文本的上标。 要使用脚注，子由使用命令\verb=\footnote=。
+\begin{miniexammar}{.55\textandmarginlen}{
+This is something unclear\footnote{This means that ...}. And some other texts are here.
+}
+\begin{lstlisting}
+This is something unclear\footnote{This means that ...}. And some other texts are here.
+\end{lstlisting}
+\end{miniexammar}
+
+与子由不同，Abigail 更喜欢使用 marginpars 进行标注。 marginpar 出现在当前页面的页边空白处，但不像脚注那样具有数字。
+\begin{miniexammar}{.6\textandmarginlen}{
+% We have to fake a margin par here.
+\parbox{.68\textwidth}{This is something unclear. And some other texts are here.} \hspace{.03\textwidth}
+\parbox{.27\textwidth}{That is, we have to ...}
+}
+\begin{lstlisting}
+This is something unclear\marginpar{That is, we have to ...}. And some other texts are here.
+\end{lstlisting}
+\end{miniexammar}
+
+marginpar 出现在页边中，并且与给出 marginpar 的文本高度相同。 当Abigail看到子由使用脚注而不是marginpar时，她请求他更改它们，因为她认为marginpar更好。子由当然不同意她的说法，但他同意她的另一个说法，即在一个文件中注解的风格应该相互一致。
+
+为了确定使用什么注记方式，子由建议他们玩井字游戏，Abigail认为这是个好主意。 几分钟后，Abigail以微弱优势赢得了比赛。 子由打趣说下次或许她应该让他赢，于是Abigail笑着回答：“那还有待观察”。 尽管如此，她还是有一种隐隐的感觉，就是子由是故意让她成为赢家的，但从子由的遗憾表情上却无法证明。
+
+\subsection{合并组内工作}
+子由和Abigail只需要从团队成员那里收集chapter.tex。 他们根据每个人重命名文件，以便他们可以轻松识别每个文件的负责人。 之后，他们将每个文件输入到空模板的 Chapter.tex 中。 然后可以从模板的 encapsulation.tex 生成最终输出。
+
+直接复制内容不是输入文件的好选择。 子由正要在网上搜索这个，Abigail在encapsulation.tex中发现chapter.tex是通过命令\verb=\input=被导入到这个文件的。 以下代码显示了 encapsulation.tex 中的内容。 
+\begin{lstlisting}
+\input{chapter.tex}
+\end{lstlisting}
+传递给该命令的参数是目标文件的相对路径。Abigail不知道相对路径是什么意思，所以对计算机有一定了解的子由给她解释说，相对目录就是文件相对于使用该路径的文件的路径。在这个例子中，使用相对目录的文件是encapsulation.tex，由于两个文件在同一个文件夹中，chapter.tex的相对目录就是它的名字。如果子由和Abigail决定将团队成员的文件放入名为 Files 的文件夹中，则该目录应位于开始包含文件夹名称加上 \verb=/= 或 \verb=\=，具体取决于文件系统。由于\LaTeX{}中\verb=\=是保留字，所以应使用\verb=/=.
+
+直到他们输入完毕，子由才在网上看到了搜索结果，发现了另一个命令，\verb=\include=。详细看了这个网页后，他告诉Abigail，\verb=\include= 是这里更好的选择，因为它在某种程度上提高了编译速度。Abigail不知道什么是编译，对这种技术性的东西也不感兴趣，但她信任子由。她也有点喜欢子由，当他耐心而温柔地向她解释她不明白的事情。于是她装作好奇，让子由给她解释编译。
+
+所以他们的 Chapters.tex 最终的形式是这样的：
+\begin{lstlisting}
+\include{Files/The first file}
+
+\include{Files/The second file}
+
+\include{Files/The third file}
+...
+\end{lstlisting}
+请注意，文件扩展名 (.tex) 不允许在 \verb=\include= 中使用，而可以在 \verb=\input= 中使用。 此外，他们必须确保团队成员没有利用 \verb=\include=，因为它不能在另一个被\verb=\include=包含的文件中使用。 幸运的是，他们可以确定这一点，因为团队成员们都不知道此命令。
+
+\subsection{背景，页眉和页脚}
+子由和Abigail注意到素材模板会自动为每个页面添加背景、页眉和页脚。 encapsulation.tex 为背景加载包背景，为页眉和页脚加载包 fancyhdr。
+
+页眉和页脚通过以下代码在 encapsulation.tex 中设置：（以 \verb=%= 开头的行是 \emph{被注释的}，因此它不会对输出的 .pdf 文件产生影响。）
+\begin{lstlisting}
+% Define the header and footer for pages.
+
+% Place the number of the current page.
+\fancyhead[LEH,ROH]{\bfseries\thepage}
+
+% Beautify the display of chapter and section marks.
+\renewcommand{\chaptermark}[1]{%
+\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{%
+\markright{\thesection\ #1}}
+
+\fancyhead[LOH]{\bfseries\rightmark}
+\fancyhead[REH]{\bfseries\leftmark}
+
+% Add copyright in the footer
+\fancyfoot[COF,CEF]{\bfseries\copyright{} The XJTLU Math Club -- All rights reserved}
+\end{lstlisting}
+页眉由命令\verb=\fancyhead= 控制，页脚由命令\verb=\fancyfoot= 控制。 通过检查可选参数，子由猜测 L 和 R 代表左和右，E 和 O 代表偶数和奇数（页码），H 和 F 分别代表页眉和页脚。 看一下 fancyhdr 的文档就证实了这一点。 他问Abigail是否喜欢页面样式。 Abigail认为作者的品味很好，所以他们决定不改变这一点。
+
+背景设置为数学社的标志。 事实上，添加这个图不知何故使文档变得丑陋，甚至我也不明白为什么必须将其添加到所有材料中。 当时的部门负责人告诉我，这是对那些以被禁止的方式使用这些材料的人的一种防御。
+
+我真的希望这个环境能够改善到一种状态，即使是以最自由的许可证分发材料，也不会有人窃取我们的知识产权。
+
+\subsection{索引和参考文献}
+子由和Abigail想听听读者对之前材料的意见，以便他们根据他们的意见来完善未来的材料。 一些读者指出，他们花了很多精力在材料中找到特定术语，如果添加了重要术语列表，他们将不胜感激。
+
+Abigail回忆说，有一次，当她试图在微积分教科书的附录中找到一些东西时，她翻了太多页，然后转向了一个名为“索引”的部分，其中的术语是根据它们的页数列出的。 于是子由在网上一搜，发现\LaTeX{}中的Indexing，几条命令就可以轻松搞定。
+
+首先，对于他们想要在索引页面中列出的任何重要术语，他们使用命令\verb=\index= 来标记它。 要打印索引页，需要调用命令 \verb=\printindex=，并且在文档环境之前应该调用命令 \verb=\makeindex=。 在 encapsulation.tex 中，只需取消注释相关代码行即可。 最后，要打印索引页，他们必须首先在 encapsulation.tex 上运行 \LaTeX{} 一次，然后在文件上运行 MakeIndex 一次，最后在文件上运行 \LaTeX{} 两次。 以下示例显示了使用 Index 的结果。
+\begin{miniexammar}{.35\textandmarginlen}{
+\section*{Index}
+limit, vi, 3\\
+derivative, 3-5
+}
+\begin{lstlisting}
+% At page vi
+\index{limit}
+% At page 3
+\index{limit}
+\index{derivative}
+% At page 4
+\index{derivative}
+% At page 5
+\index{derivative}
+\end{lstlisting}
+\end{miniexammar}
+
+子由把定积分和不定积分列为两个单独的索引条目，而Abigail则认为它们应该在同一个索引：积分下。 要使用子索引项，应应用以下语法。
+\begin{miniexammar}{.4\textandmarginlen}{
+\section*{Index}
+integral, 5
+\par \hspace{2em} definite integral, 11
+\par \hspace{2em} indefinite integral, 7
+}
+\begin{lstlisting}
+% At page 5
+\index{integral}
+% At page 7
+\index{integral!definite integral}
+% At page 11
+\index{integral!indefinite integral}
+\end{lstlisting}
+\end{miniexammar}
+
+Abigail记得，为了学术诚信，他们应该为其他人的每部作品添加参考。 B\textsc{ib}\TeX{} 是一个很好的工具处理参考（参考书目）。 要使用这个工具，他们必须准备一个 B\textsc{ib}\TeX{} 数据库。 这是一个扩展名为 .bib 的文件，其中包含条目。 填写条目是一项乏味的工作，但幸运的是，大多数学术网站都提供了允许用户直接下载他想要使用的源的 .bib 文件的工具。 以下代码显示了一个典型的数据库条目：
+\begin{lstlisting}
+@article{may1979alpha,
+	title="Alpha-particle-induced soft errors in dynamic memories",
+	author="T.C. {May} and M.H. {Woods}",
+	journal="IEEE Transactions on Electron Devices",
+...
+}
+\end{lstlisting}
+子游和阿比盖尔不用担心条目中的细节。 他们唯一需要记住的是条目的标签，紧跟在 \verb={= 之后的标签，因为它会在 \verb=\cite= 命令中使用以产生对该来源的引用。 文档中引用的每个来源都出现在参考书目页面中，该页面由以下两个命令控制：
+\begin{lstlisting}
+\bibliography{file-list}
+\bibliographystyle{style}
+\end{lstlisting}
+，其中 file-list 是数据库文件的列表，而 style 是参考书目打印的书目样式。 \url{https://www.overleaf.com/learn/latex/Bibtex_bibliography_styles} 显示所有预定义的 B\textsc{ib}\TeX{} 样式。
+
+\subsection{双边打印}
+现在子由和Abigail已经完成了单独的文件的合并，正在计划完成工作后休息一下，但还有更多的事情等着他们。
+
+默认情况下，当文档类为 book 时，\LaTeX{} 使用双边打印。起初子由和Abigail没有注意到这一点（他们不知道），直到Abigail看到输出的页面没有对齐。也就是说，在一个页面上，内容向左伸出，而在下一页，内容向右伸出。Abigail不想再给子由添麻烦了，她自己搜了一下，发现这就是所谓的双边，专用于书籍等。
+
+Abigail试图通过打开一本书并检查其布局来理解这一点。她注意到里面的一部分\footnote{当打开一本书时，出现在右侧的第一页编号为 1，因此出现在右侧的所有奇数页都是奇数。} 页面是粘在一起使它们形成一本书。她猜测，双边在每页靠里的地方留下了额外的空间。然而，结果却与她的直觉相矛盾。在双面模式下，\LaTeX{} 会缩小每个页面的内部部分。这是因为 \LaTeX{} 想要为位于外部部分的页边提供更多空间。
+
+子由从Abigail那里了解到了这一点，所以他们开始了另一次审查。他们很快就发现了问题。对于目录和其他一些页面（如前言），模板使用罗马编号。对于正文，页码更改为阿拉伯数字。然而，页面的布局并不取决于它是出现在左侧还是右侧。相反，它完全由页数决定。比如说，罗马数字以iii结尾，那么当阿拉伯数字从1开始时，左边会出现相应的页面，这是一场灾难。为了解决这个问题，子由找到了为双边模式设计的命令\verb=\cleardoublepage=。它通过（可能）添加新页面来确保命令之后的内容将出现在右侧的页面上。当然，新页面将是空的。但Abigail认为读者可能会将其误解为印刷失败的迹象。为了明确地识别这种行为，在 xjtlumath（准确地说，是模板加载的子包 xjtlumaterial）中，该命令被更新，在该命令添加的每个空页面上添加句子“This page is intentionally left blank”。
+
+\subsection{他们故事的一个结束}
+子由和Abigail关于材料写作的故事到此结束，但正如一句老话所说的“结束也是开始”，他们其他的故事才刚刚开始。 Abigail钦佩子由在计算机科学方面的广泛知识，并在子由教她时享受它。 子由也受到了Abigail的能量的启发，尤其是在工作中。 能找到像Abigail这样有趣又美丽的女孩，他感到很幸运，她的幽默让子由笑了好几次。
+
+于是两人在浪漫的餐厅订了位子来庆祝他们的合作，而我一个人坐在宿舍里，努力完成这份文件。 不过，我希望你们，未来的数学俱乐部成员，不仅可以找到知识和经验，还可以像子由和Abigail一样找到爱，只是不是在虚构的故事中。
