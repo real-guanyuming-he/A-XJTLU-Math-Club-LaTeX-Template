@@ -1,0 +1,79 @@
+%\section{Package xjtluexam}
+%This package enables one to typeset exam papers.
+%    \begin{macrocode}
+\ProvidesPackage{xjtluexam}[2021 by Guanyuming He]
+\NeedsTeXFormat{LaTeX2e}
+%    \end{macrocode}
+
+%Counters
+%
+%questioncnt should be reset whenever an exam paper begins. choicecnt (for MCQ questions) is reset by the choice environments.
+%
+%subquestioncnt does not reset when questioncnt is changed. It is reset to 0, not 1 at the beginning of each question, and the command \verb=\subquestion= refsteps it at the beginning.
+%    \begin{macrocode}
+\newcounter{questioncnt}
+\newcounter{subquestioncnt}
+
+\newcounter{choicecnt}
+%    \end{macrocode}
+
+% These two commands may be redefined by the choice environments.
+% \begin{macro}{\choicenumber}
+% This command gives the choicecnt in Alph and steps the counter.
+%    \begin{macrocode}
+\newcommand{\choicenumber}{\refstepcounter{choicecnt}\Alph{choicecnt}\hspace{1em}}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\choicespace}
+% This command gives a space depending on the choice environment in which it is given.
+%    \begin{macrocode}
+\newcommand{\choicespace}{\hspace{\stretch{1}}}
+%    \end{macrocode}
+% \end{macro}
+
+%Choice environments
+%
+% \begin{environment}{shortchoices}
+% This environment is used to create short choices (multiple choices are in one line). The lines can be breaked normally.
+%    \begin{macrocode}
+\newenvironment{shortchoices}%
+{\setcounter{choicecnt}{0}\renewcommand{\choicespace}{\hspace{\stretch{1}}}}%
+{}
+%    \end{macrocode}
+% \end{environment}
+
+% \begin{environment}{longchoices}
+% This environment is used to create long choices (one choice occupies one line or more).
+%    \begin{macrocode}
+\newenvironment{longchoices}%
+{\setcounter{choicecnt}{0}\renewcommand{\choicespace}{\vspace{5pt}\par\noindent}}%
+{}
+%    \end{macrocode}
+% \end{environment}
+
+%Question commands
+% \begin{macro}{\question}
+% This command introduces a question
+%    \begin{macrocode}
+\newcommand{\question}{\refstepcounter{questioncnt}\par\noindent%
+\thequestioncnt.\hspace{1em}%
+\setcounter{subquestioncnt}{0}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\subquestion}
+% This command introduces a sub question
+%    \begin{macrocode}
+\newcommand{\subquestion}{\refstepcounter{subquestioncnt}\par\indent(\alph{subquestioncnt})\hspace{1em}}
+%    \end{macrocode}
+% \end{macro}
+
+
+% \begin{environment}{exampaper}
+%Write an exam paper in this
+%    \begin{macrocode}
+\newenvironment{exampaper}%
+{\setcounter{questioncnt}{0}\par\noindent}%
+{\par}
+%    \end{macrocode}
+% \end{environment}

@@ -272,3 +272,13 @@ TSWLatexianTemp*
 # Makeindex log files
 *.lpz
 
+# No pdf except the documentations
+*.pdf
+!xjtlumathdoc_en-us.pdf
+!xjtlumathdoc_zh-cn.pdf
+
+# No .dtx file and extracted .sty file in the documentation folder except the package for the documentation.
+Documentation/*.dtx
+Documentation/*.sty
+Documentation/!mydoc.dtx
+Documentation/!mydoc.ins
