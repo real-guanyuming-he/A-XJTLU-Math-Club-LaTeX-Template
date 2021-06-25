@@ -4,6 +4,7 @@
 \usepackage{mydoc}
 \usepackage{xjtlumathstyle}
 \usepackage{xjtlumaththm}
+\usepackage{xjtluexam}
 
 \usepackage{listings}
 \usepackage{xcolor}
@@ -50,11 +51,14 @@ breakindent=0pt% disable indention for line breaks
 
 \include{Tutorial 4}
 
+\include{Tutorial 5}
+
 \include{Templates}
 
 \part{内部文档}
 这部分是 xjtlumath 的内部文档。 它由工具doc自动生成。 这部分用于包的维护，不建议包的一般用户阅读，除非他们想了解包的实现细节。很抱歉内部文档注释不包含中文版。
-\DocInput{xjtlumath.dtx} 
+\DocInput{xjtlumath.dtx}
+\DocInput{xjtluexam.dtx}
 
 \clearpage
 \DocInput{mydoc.dtx}

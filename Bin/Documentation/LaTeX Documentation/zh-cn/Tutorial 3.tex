@@ -4,7 +4,7 @@
 图形、表格和许多其他占据随机宽度和高度（通常很大）区域的东西在 \LaTeX{} 中被视为 \emph{floats}。 Floats在今天的文档中很常见，但它们在排版时会造成很大的麻烦。 在本节中，我们将与月一起了解如何在 \LaTeX{} 中处理floats。
 
 \subsection{插入图像}
-要在 \LaTeX{} 中插入图像，包 graphicsx（由模板文件加载）是一个不错的选择。 它提供了接受输入图像文件名和一些可选说明符的命令 \verb=\includegraphics=。
+要在 \LaTeX{} 中插入图像，包 graphicx（由模板文件加载）是一个不错的选择。 它提供了接受输入图像文件名和一些可选说明符的命令 \verb=\includegraphics=。
 \begin{miniexammar}{.4\textandmarginlen}{
 \includegraphics[width=\textwidth]{assets/examplelogo.jpg}
 }
@@ -37,7 +37,7 @@ Figure \ref{fig:example} shows the figure Yue uses.
 \LaTeX{} 会自动给它一个数字，以便月能够引用它。 请注意，由于内部实现原因，\verb=\label= 只能紧跟在 \verb=\caption= 之后，以免引用错误。
 
 \subsection{表}
-即使使用数字确实需要额外的环境，但它仍然很简单，月很快就熟悉了。 然而，在 \LaTeX{} 中处理表格更为复杂。
+即使使用图像确实需要额外的环境，但它仍然很简单，月很快就熟悉了。 然而，在 \LaTeX{} 中处理表格更为复杂。
 
 要在 \LaTeX 中生成类似表格的内容，月必须使用特殊环境。 tabular和array是其中的两个具体例子。 事实上，这两种环境在大多数方面是相似的，一个主要区别是array经常用于数学模式。
 
