@@ -42,7 +42,7 @@
 %    \end{macrocode}
 
 % \begin{environment}{\newmdthmenv}
-% This environment is used to create thm environments using package mdframed.
+% This command is used to create thm environments using package mdframed.
 %    \begin{macrocode}
 \newcommand{\newmdthmenv}[3]{%
 % #1 caption
@@ -113,7 +113,7 @@ frametitle={%
 % Simplify writing FRactional DerivaTives (1 function 2 variable)\\
 %    \begin{macrocode}
 \newcommand{\frdt}[2][f]{\ensuremath{\frac{\mathrm{d}#1}{\mathrm{d}#2}}}
-\newcommand{\frpdt}[2][f]{\ensuremath{\frac{\grad #1}{\grad #2}}}
+\newcommand{\frpdt}[2][f]{\ensuremath{\frac{\partial #1}{\partial #2}}}
 %    \end{macrocode}
 
 % Infinite series (1: sequence 2: subscript 3: starting count)

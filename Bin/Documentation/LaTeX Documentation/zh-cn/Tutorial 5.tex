@@ -1,11 +1,11 @@
 \newcommand{\raul}{Ra\'ul}
-\section{Tutorial 5: \raul{} Typesetting An Exam Paper}
-One task of the department is to elucidate the past exam papers of those math courses. In this tutorial, we will see how \raul{} takes advantage of the package xjtluexam to typeset an exam paper.
+\section{教程 5: \raul{} 排版试卷}
+该部门的一项任务是阐明那些数学课程过去的试卷。 在本教程中，我们将看到 \raul{} 如何利用 xjtluexam 包来排版试卷。
 
-\subsection{The exampaper Environment}
-To begin an exam paper, \raul{} uses the exampaper environment. The environment itself gives no output, but provides several commands\footnote{In fact, the commands are not \emph{provided} by this environment. It merely does some initialization works so that these commands can function normally.}.
+\subsection{exampaper 环境}
+要开始试卷，\raul{} 使用exampaper环境。 环境本身没有给出输出，但是提供了几个命令\footnote{其实命令不是这个环境\emph{提供}的。 它只是做了一些初始化工作，以便这些命令可以正常运行。}。
 
-Then, \raul{} types \verb=\question= to start a question.
+然后，\raul{} 输入 \verb=\question= 开始提问。
 \begin{miniexammar}{.5\textandmarginlen}{
 \begin{exampaper}
 \question Justify whether $\infseries{n}{1}$ converges or not when $a_n \to 0$.
@@ -26,7 +26,7 @@ Then, \raul{} types \verb=\question= to start a question.
 \end{lstlisting}
 \end{miniexammar}
 
-The question counter can be referenced normally.
+问题计数器可以被正常引用。
 \begin{miniexammar}{.5\textandmarginlen}{
 \begin{exampaper}
 \question Justify whether $\infseries{n}{1}$ converges or not when $a_n \to 0$.
@@ -49,7 +49,7 @@ A solution to Question \ref{ques:examques} is ...
 \end{lstlisting}
 \end{miniexammar}
 
-Subquestions may be given, and the numbering for them is alphabetical.
+可以给出子问题，它们的编号是按字母顺序排列的。
 \begin{miniexammar}{.5\textandmarginlen}{
 \begin{exampaper}
 \question Given the function $f=...$
@@ -68,12 +68,12 @@ Subquestions may be given, and the numbering for them is alphabetical.
 \end{lstlisting}
 \end{miniexammar}
 
-\subsection{Multiple Choice Questions}
-Multiple choice questions (MCQs) appear in exam papers quite often. xjtluexam package designs several environments and commands just for them.
+\subsection{选择题}
+多项选择题 (MCQ) 经常出现在试卷中。 xjtluexam 包为他们设计了几个环境和命令。
 
-To introduce the choices of a MCQ, \raul{} begins a choice environment. There are two choice environments: \emph{shortchoices} and \emph{longchoices}. As their name suggest, they are used to introduce short choices (multiple choices are in one line) and long choices (one choice occupies one line), respectively.
+为了引入 MCQ 的选择，\raul{} 开始了一个选择环境。 有两种选择环境：\emph{shortchoices} 和\emph{longchoices}。 顾名思义，它们分别用于引入短选项（多个选项在一行）和长选项（一个选项占一行）。
 
-Inside one of the environments, a choice number is given by the \verb=\choicenumber= command. The space after a choice is given by the command \verb=\choicespace=. \raul{} doesn't want a space at the end of the last choice, so he only uses the command between choices.
+在任何一个环境中，\verb=\choicenumber= 命令给出了一个选择编号。 选项后的空格由命令 \verb=\choicespace= 给出。 \raul{} 不想在最后一个选项的末尾有一个空格，所以他只在选项之间使用命令。
 \begin{miniexammar}{.55\textandmarginlen}{
 \begin{exampaper}
 \question Evaluate
@@ -99,7 +99,7 @@ Inside one of the environments, a choice number is given by the \verb=\choicenum
 \end{lstlisting}
 \end{miniexammar}
 
-If \raul{} feels that the space is too tight, he can freely break the lines
+如果 \raul{} 觉得空间太紧，他可以随意断行
 \begin{miniexammar}{.42\textandmarginlen}{
 \begin{exampaper}
 \question Evaluate
@@ -124,9 +124,9 @@ If \raul{} feels that the space is too tight, he can freely break the lines
 \end{exampaper}
 \end{lstlisting}
 \end{miniexammar}
-Here, \raul{} uses the comment sign \verb=%= to eliminate the line break character, which would be treated as a white space by \LaTeX{} if not removed.
+此处，\raul{} 使用注释符号 \verb=%= 来消除换行符，如果不移除，该换行符将被 \LaTeX{} 视为一个空白符。
 
-For longchoices environment, the usage is similar, except that \raul{} doesn't need to care about the line breaks, as one choice itself begins a new line at its end.
+对于 longchoices 环境，用法类似，除了 \raul{} 不需要关心换行符，因为一个选择本身在其末尾开始新行。
 \begin{miniexammar}{.42\textandmarginlen}{
 \begin{exampaper}
 \question Which of the following functions satisfy Laplace's Equation
@@ -153,8 +153,8 @@ For longchoices environment, the usage is similar, except that \raul{} doesn't n
 \end{lstlisting}
 \end{miniexammar}
 
-\subsection{Space And Rules}
-It is conventional to leave a vertical space after a comprehensive question is given. To add a certain amount of vertical space, \raul{} uses command \verb=\vspace=.
+\subsection{空间和 Rules}
+在给出一个综合问题后，通常会留下一个垂直空间。 要添加一定量的垂直空间，\raul{} 使用命令 \verb=\vspace=。
 \begin{miniexammar}{.5\textandmarginlen}{
 \begin{exampaper}
 \question Find ...
@@ -169,7 +169,7 @@ It is conventional to leave a vertical space after a comprehensive question is g
 \end{lstlisting}
 \end{miniexammar}
 
-He is quite satisfied with this result, though he wonders how to evenly distribute questions on a page. The command \verb=\stretch=, when used in \verb=\vspace=, gives a space with respect to the number given to it. For example, if \raul{} wants to place three questions evenly on a page, he writes:
+他对这个结果非常满意，尽管他想知道如何在页面上均匀分布问题。 命令\verb=\stretch=，当在\verb=\vspace= 中使用时，给出一个与给定数字相关的空间。 例如，如果 \raul{} 想在一页上均匀地放置三个问题，他写道：
 \begin{miniexammar}{.5\textandmarginlen}{
 \begin{exampaper}
 \question Find ...
@@ -187,7 +187,7 @@ He is quite satisfied with this result, though he wonders how to evenly distribu
 \question Evaluate ...
 \end{lstlisting}
 \end{miniexammar}
-The number can be changed for a relatively larger space. For example, if \raul{} writes
+对于相对较大的空间，可以更改数字。 例如，如果 \raul{} 写
 \begin{lstlisting}
 \question Find ...
 \vspace{\stretch{2}}
@@ -195,15 +195,15 @@ The number can be changed for a relatively larger space. For example, if \raul{}
 \vspace{\stretch{1}}
 \question Evaluate ...
 \end{lstlisting}
-, then the empty space left will be evenly divided into $2+1=3$ pieces. Two of them are given to the place where \verb=\stretch{2}= is given, and the other one is given to the place where \verb=\stretch{1}= is given.
+，那么剩下的空间就会被平均分成$2+1=3$块。 其中两个给定\verb=\stretch{2}= 的地方，另一个给定\verb=\stretch{1}= 的地方。
 
-To create questions that require a student to fill in the blanks, \raul{} has to draw the blanks, that is, to draw a line under each of the blanks. In \LaTeX{}, a horizontal line can be drawn by the command
+要创建要求学生填写空白的问题，\raul{} 必须绘制空白，即在每个空白下方画一条线。 在\LaTeX{}中，可以通过以下命令绘制一条水平线
 \begin{verbatim}
 \rule[lift]{width}{height}
 \end{verbatim}
-, where lift is with respect to the baseline.
+，其中lift是相对于基线的。
 
-To simplify the work, xjtluexam provides the command \verb=\blankline= to draw a line with a given width (default 1cm).
+为了简化工作，xjtluexam 提供了命令 \verb=\blankline= 来绘制具有给定宽度（默认为 1cm）的线。
 \begin{miniexammar}{.5\textandmarginlen}{
 \begin{exampaper}
 \question $(3\vec{i}-9\vec{j}) \times (2\vec{i}+1\vec{j}) = $ \blankline
@@ -218,4 +218,4 @@ To simplify the work, xjtluexam provides the command \verb=\blankline= to draw a
 \end{lstlisting}
 \end{miniexammar}
 
-Now \raul{} has everything he needs to know, and an exam paper will be ready soon...
+现在 \raul{} 拥有了他需要知道的一切，并且很快就会准备好试卷...
