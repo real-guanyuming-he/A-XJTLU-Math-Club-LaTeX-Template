@@ -69,7 +69,7 @@ Subquestions may be given, and the numbering for them is alphabetical.
 \end{miniexammar}
 
 \subsection{Multiple Choice Questions}
-Multiple choice questions (MCQs) appear in exam papers quite often. xjtluexam packages designs several environments and commands just for them.
+Multiple choice questions (MCQs) appear in exam papers quite often. xjtluexam package designs several environments and commands just for them.
 
 To introduce the choices of a MCQ, \raul{} begins a choice environment. There are two choice environments: \emph{shortchoices} and \emph{longchoices}. As their name suggest, they are used to introduce short choices (multiple choices are in one line) and long choices (one choice occupies one line), respectively.
 
@@ -99,18 +99,18 @@ Inside one of the environments, a choice number is given by the \verb=\choice= c
 \end{lstlisting}
 \end{miniexammar}
 
-If \raul{} feels that the space is too tight, he can freely break a line.
+If \raul{} feels that the space is too tight, he can freely break the lines
 \begin{miniexammar}{.42\textandmarginlen}{
 \begin{exampaper}
 \question Evaluate
 \[
 \int_{-1}^1 x^2\cosh{x} \dx
 \]
-\begin{shortchoices}
-\choicenumber $\frac{2\sinh{1}}{3}$\choicespace
-\choicenumber $-\frac{2\sinh{1}}{3}$ \\
-\choicenumber $\frac{2\cosh{1}}{3}$\choicespace
-\choicenumber $-\frac{2\cosh{1}}{3}$
+\begin{shortchoices}%
+\choicenumber $\frac{2\sinh{1}}{3}$\choicespace%
+\choicenumber $-\frac{2\sinh{1}}{3}$\\
+\choicenumber $\frac{2\cosh{1}}{3}$\choicespace%
+\choicenumber $-\frac{2\cosh{1}}{3}$%
 \end{shortchoices}
 \end{exampaper}
 }
@@ -118,10 +118,104 @@ If \raul{} feels that the space is too tight, he can freely break a line.
 \begin{exampaper}
 \question Evaluate
 \[\int_{-1}^1 x^2\cosh{x} \dx\]
-\begin{shortchoices}
-\choicenumber $\frac{2\sinh{1}}{3}$ \choicespace \choicenumber $-\frac{2\sinh{1}}{3}$ \\ \choicenumber $\frac{2\cosh{1}}{3}$ \choicespace \choicenumber $-\frac{2\cosh{1}}{3}$ 
+\begin{shortchoices}%
+\choicenumber $\frac{2\sinh{1}}{3}$\choicespace \choicenumber $-\frac{2\sinh{1}}{3}\\ \choicenumber $\frac{2\cosh{1}}{3}$\choicespace \choicenumber $-\frac{2\cosh{1}}{3}$%
 \end{shortchoices}
 \end{exampaper}
 \end{lstlisting}
 \end{miniexammar}
+Here, \raul{} uses the comment sign \verb=%= to eliminate the line break character, which would be treated as a white space by \LaTeX{} if not removed.
 
+For longchoices environment, the usage is similar, except that \raul{} doesn't need to care about the line breaks, as one choice itself begins a new line at its end.
+\begin{miniexammar}{.42\textandmarginlen}{
+\begin{exampaper}
+\question Which of the following functions satisfy Laplace's Equation
+\[\frpdt[^2 f]{x^2} + \frpdt[^2 f]{y^2} = 0\]
+\begin{longchoices}%
+\choicenumber $f(x,y):=x^3y-xy^3$\choicespace%
+\choicenumber $f(x,y):=\log{(4x^2+4y^2)}$\choicespace%
+\choicenumber $f(x,y):=3 x^4 y^5 - 2 x^2 y^3$\choicespace%
+\choicenumber $f(x,y):=\cos{(2x^2-2y^2)}$%
+\end{longchoices}
+\end{exampaper}
+}
+\begin{lstlisting}
+\begin{exampaper}
+\question Which of the following functions satisfy Laplace's Equation
+\[\frpdt[^2 f]{x^2} + \frpdt[^2 f]{y^2} = 0\]
+\begin{longchoices}%
+\choicenumber $f(x,y):=x^3y-xy^3$\choicespace%
+\choicenumber $f(x,y):=\log{(4x^2+4y^2)}$\choicespace%
+\choicenumber $f(x,y):=3 x^4 y^5 - 2 x^2 y^3$\choicespace%
+\choicenumber $f(x,y):=\cos{(2x^2-2y^2)}$%
+\end{longchoices}
+\end{exampaper}
+\end{lstlisting}
+\end{miniexammar}
+
+\subsection{Space And Rules}
+It is conventional to leave a vertical space after a comprehensive question is given. To add a certain amount of vertical space, \raul{} uses command \verb=\vspace=.
+\begin{miniexammar}{.5\textandmarginlen}{
+\begin{exampaper}
+\question Find ...
+\vspace{.8cm}
+\question Prove ...
+\end{exampaper}
+}
+\begin{lstlisting}
+\question Find ...
+\vspace{.8cm}
+\question Prove ...
+\end{lstlisting}
+\end{miniexammar}
+
+He is quite satisfied with this result, though he wonders how to evenly distribute questions on a page. The command \verb=\stretch=, when used in \verb=\vspace=, gives a space with respect to the number given to it. For example, if \raul{} wants to place three questions evenly on a page, he writes:
+\begin{miniexammar}{.5\textandmarginlen}{
+\begin{exampaper}
+\question Find ...
+\vspace{.5cm}
+\question Prove ...
+\vspace{.5cm}
+\question Evaluate ...
+\end{exampaper}
+}
+\begin{lstlisting}
+\question Find ...
+\vspace{\stretch{1}}
+\question Prove ...
+\vspace{\stretch{1}}
+\question Evaluate ...
+\end{lstlisting}
+\end{miniexammar}
+The number can be changed for a relatively larger space. For example, if \raul{} writes
+\begin{lstlisting}
+\question Find ...
+\vspace{\stretch{2}}
+\question Prove ...
+\vspace{\stretch{1}}
+\question Evaluate ...
+\end{lstlisting}
+, then the empty space left will be evenly divided into $2+1=3$ pieces. Two of them are given to the place where \verb=\stretch{2}= is given, and the other one is given to the place where \verb=\stretch{1}= is given.
+
+To create questions that require a student to fill in the blanks, \raul{} has to draw the blanks, that is, to draw a line under each of the blanks. In \LaTeX{}, a horizontal line can be drawn by the command
+\begin{verbatim}
+\rule[lift]{width}{height}
+\end{verbatim}
+, where lift is with respect to the baseline.
+
+To simplify the work, xjtluexam provides the command \verb=\blankline= to draw a line with a given width (default 1cm).
+\begin{miniexammar}{.5\textandmarginlen}{
+\begin{exampaper}
+\question $(3\vec{i}-9\vec{j}) \times (2\vec{i}+1\vec{j}) = $ \blankline
+\question $\frdt[\cos^2 x \sin x]{x} = $ \blankline[1.5cm]
+\end{exampaper}
+}
+\begin{lstlisting}
+\begin{exampaper}
+\question $(3\vec{i}-9\vec{j}) \times (2\vec{i}+1\vec{j}) = $ \blankline
+\question $\frdt[\cos^2 x \sin x]{x} = $ \blankline[1.5cm]
+\end{exampaper}
+\end{lstlisting}
+\end{miniexammar}
+
+Now \raul{} has everything he needs to know, and an exam paper will be ready soon...

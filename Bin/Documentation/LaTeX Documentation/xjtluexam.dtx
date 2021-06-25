@@ -47,7 +47,8 @@
 % This environment is used to create long choices (one choice occupies one line or more).
 %    \begin{macrocode}
 \newenvironment{longchoices}%
-{\setcounter{choicecnt}{0}\renewcommand{\choicespace}{\vspace{5pt}\par\noindent}}%
+{\setcounter{choicecnt}{0}\renewcommand{\choicespace}{\vspace{5pt}\par\noindent}%
+\choicespace}%
 {}
 %    \end{macrocode}
 % \end{environment}
@@ -77,3 +78,11 @@
 {\par}
 %    \end{macrocode}
 % \end{environment}
+
+%For ``Fill in the blanks''
+% \begin{macro}{\blankline}
+% This command gives a rule with a given width (default 1cm)
+%    \begin{macrocode}
+\newcommand{\blankline}[1][1cm]{\rule{#1}{.4pt}}
+%    \end{macrocode}
+% \end{macro}

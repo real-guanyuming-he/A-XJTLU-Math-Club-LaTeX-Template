@@ -274,11 +274,14 @@ TSWLatexianTemp*
 
 # No pdf except the documentations
 *.pdf
-!xjtlumathdoc_en-us.pdf
-!xjtlumathdoc_zh-cn.pdf
+!**/xjtlumathdocENUS.pdf
+!xjtlumathdocZHCN.pdf
 
-# No .dtx file and extracted .sty file in the documentation folder except the package for the documentation.
-Documentation/*.dtx
-Documentation/*.sty
-Documentation/!mydoc.dtx
-Documentation/!mydoc.ins
+# No extracted .sty file, we only need .dtx and .ins.
+*.sty
+
+# No .dtx and .ins file in the documentation folder, except mydoc.dtx and mydoc.ins
+Documentation/**/*.dtx
+Documentation/**/*.ins
+!Documentation/**/mydoc.dtx
+!Documentation/**/mydoc.ins
