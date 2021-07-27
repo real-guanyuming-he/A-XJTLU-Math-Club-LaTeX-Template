@@ -325,8 +325,98 @@ $\lim\limits_{x \to 0}f(x)$
 \end{lstlisting}
 \end{parexammar}
 
+\subsection{Delimiters}
+Delilah already knows how to type basic delimiters. For parentheses and square brackets, plain text will do; and since the curly brackets are reserved by \LaTeX{}, Delilah needs to add a backslash before each of them.
+\begin{parexammar}{.45\textandmarginlen}{
+The range of a function may be expressed explicitly by its domain and itself: the range of $f: X \to Y$ is $f(X)$.
+
+In some context the arguments of a function are enclosed by square brackets: $f[x]$.
+
+Curly brackets are often used to show a set: $S := \{2,4,\cdots\}$.
+}
+\begin{lstlisting}
+The range of a function may be expressed explicitly by its domain and itself: the range of $f: X \to Y$ is $f(X)$.
+
+In some context the arguments of a function are enclosed by square brackets: $f[x]$.
+
+Curly brackets are often used to show a set: $S := \{2,4,\cdots\}$.
+\end{lstlisting}
+\end{parexammar}
+
+Yet in some conditions where the expression being enclosed has a different height, the result becomes unsatisfactory. \LaTeX{} provides a mechanism to enable the user to automatically or manually adjust the size of delimiters.
+
+Adding \verb=\left= and \verb=\right= around a pair of delimiters automatically adjust their size to match the expression being enclosed. However, sometimes we want the delimiters to be a bit bigger or smaller, and that's when we need to manually adjust the size.
+\begin{parexammar}{.5\textandmarginlen}{
+\[
+\left( \frac{1}{2} \right) 
+\Bigg( \bigg( \Big( \big( x\big) \Big) \bigg) \Bigg)
+\]
+}
+\begin{lstlisting}
+\[
+\left(\frac{1}{2}\right) \Bigg( \bigg( \Big( \big( x\big) \Big) \bigg) \Bigg)
+\]
+\end{lstlisting}
+\end{parexammar}
+
+Delilah once mismatched a pair of delimiters, but she found that the height of the two symbols are still the same. She learns in addition that the dot `.' can be used to inform \LaTeX{} to insert nothing.
+\begin{parexammar}{.5\textandmarginlen}{
+A fraction enclosed left by a parenthesis, and right by a curly bracket.
+\[
+\left(\frac{a}{b}\right\}
+\]
+A system of equations
+\[
+\left\{
+\begin{aligned}
+x+y&=1\\
+x-y&=2
+\end{aligned}
+\right.
+\]
+}
+\begin{lstlisting}
+A fraction enclosed left by a parenthesis, and right by a curly bracket.
+\[
+\left(\frac{a}{b}\right\}
+\]
+A system of equations
+\[
+\left\{
+\begin{aligned}
+x+y&=1\\
+x-y&=2
+\end{aligned}
+\right.
+\]
+\end{lstlisting}
+\end{parexammar}
+
+Now Delilah knows how to properly handle delimiters, but the repetitive \verb=\left= and \verb=\right= really makes her sick. xjtlumath simplifies the work by providing these predefined groups of delimiters. The following examples show the delimiter groups defined by xjtlumath, as well as the explicit control of the size.
+\begin{parexammar}{.5\textandmarginlen}{
+These delimiters are defined by xjtlumath.
+\[
+\rbra{x},\ \sbra{x},\ \cbra{x},\ \abs{x},\ \floor{x},\ \ceiling{x}
+\]
+One can also change the delimiter resizer.
+\[
+\abs[\bigg]{x}
+\]
+}
+\begin{lstlisting}
+These delimiters are defined by xjtlumath.
+\[
+\rbra{x},\ \sbra{x},\ \cbra{x},\ \abs{x},\ \floor{x},\ \ceiling{x}
+\]
+One can also change the delimiter resizer.
+\[
+\abs[\bigg]{x}
+\]
+\end{lstlisting}
+\end{parexammar}
+
 \subsection{Symbols}
-The standard \LaTeX{} font in math environments is neat and clean. Yet in some special occasions Delilah would like to change the font of some symbols. For example, to represent some conventional sets, she uses the blackboard font.
+The standard \LaTeX{} font in math environments is neat and clean. Yet in some special occasions Delilah would like to change the font of certain symbols. For example, to represent some conventional sets, she uses the blackboard font.
 \begin{parexammar}{.4\textandmarginlen}{
 \[
 \mathbb{R}\quad \mathbb{N}\quad \mathbb{Q}\quad \mathbb{Z}

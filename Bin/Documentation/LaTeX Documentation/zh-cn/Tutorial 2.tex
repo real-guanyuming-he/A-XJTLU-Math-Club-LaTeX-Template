@@ -322,6 +322,96 @@ $\lim\limits_{x \to 0}f(x)$
 \end{lstlisting}
 \end{parexammar}
 
+\subsection{限制符}
+Delilah 已经知道如何键入基本的分隔符。 对于圆括号和方括号，纯文本就行； 由于大括号是由 \LaTeX{} 保留的，因此 Delilah 需要在每个大括号之前添加一个反斜杠。
+\begin{parexammar}{.45\textandmarginlen}{
+The range of a function may be expressed explicitly by its domain and itself: the range of $f: X \to Y$ is $f(X)$.
+
+In some context the arguments of a function are enclosed by square brackets: $f[x]$.
+
+Curly brackets are often used to show a set: $S := \{2,4,\cdots\}$.
+}
+\begin{lstlisting}
+The range of a function may be expressed explicitly by its domain and itself: the range of $f: X \to Y$ is $f(X)$.
+
+In some context the arguments of a function are enclosed by square brackets: $f[x]$.
+
+Curly brackets are often used to show a set: $S := \{2,4,\cdots\}$.
+\end{lstlisting}
+\end{parexammar}
+
+然而，在某些情况下，被包围的表达式具有不同的高度，这时结果变得不令人满意。 \LaTeX{} 提供了一种机制，使用户能够自动或手动调整分隔符的大小。
+
+在一对分隔符周围添加 \verb=\left= 和 \verb=\right= 会自动调整它们的大小以匹配所包含的表达式。 但是，有时我们希望分隔符更大或更小，这就是我们需要手动调整大小的时候。
+\begin{parexammar}{.5\textandmarginlen}{
+\[
+\left( \frac{1}{2} \right) 
+\Bigg( \bigg( \Big( \big( x\big) \Big) \bigg) \Bigg)
+\]
+}
+\begin{lstlisting}
+\[
+\left(\frac{1}{2}\right) \Bigg( \bigg( \Big( \big( x\big) \Big) \bigg) \Bigg)
+\]
+\end{lstlisting}
+\end{parexammar}
+
+Delilah 曾经错配过一对分隔符，但她发现这两个符号的高度还是一样的。 此外，她还了解到点“.” 可用于通知 \LaTeX{} 不插入任何内容。
+\begin{parexammar}{.5\textandmarginlen}{
+A fraction enclosed left by a parenthesis, and right by a curly bracket.
+\[
+\left(\frac{a}{b}\right\}
+\]
+A system of equations
+\[
+\left\{
+\begin{aligned}
+x+y&=1\\
+x-y&=2
+\end{aligned}
+\right.
+\]
+}
+\begin{lstlisting}
+A fraction enclosed left by a parenthesis, and right by a curly bracket.
+\[
+\left(\frac{a}{b}\right\}
+\]
+A system of equations
+\[
+\left\{
+\begin{aligned}
+x+y&=1\\
+x-y&=2
+\end{aligned}
+\right.
+\]
+\end{lstlisting}
+\end{parexammar}
+
+现在 Delilah 知道如何正确处理分隔符，但是重复的 \verb=\left= 和 \verb=\right= 确实让她感到恶心。 xjtlumath 通过提供这些预定义的分隔符组来简化工作。以下的例子展示了这些预定义的分隔符组，和对分隔符大小的控制。
+\begin{parexammar}{.5\textandmarginlen}{
+These delimiters are defined by xjtlumath.
+\[
+\rbra{x},\ \sbra{x},\ \cbra{x},\ \abs{x},\ \floor{x},\ \ceiling{x}
+\]
+One can also change the delimiter resizer.
+\[
+\abs[\bigg]{x}
+\]
+}
+\begin{lstlisting}
+These delimiters are defined by xjtlumath.
+\[
+\rbra{x},\ \sbra{x},\ \cbra{x},\ \abs{x},\ \floor{x},\ \ceiling{x}
+\]
+One can also change the delimiter resizer.
+\[
+\abs[\bigg]{x}
+\]
+\end{lstlisting}
+\end{parexammar}
+
 \subsection{符号}
 数学环境中的标准 \LaTeX{} 字体整洁干净。 然而在一些特殊场合，Delilah 想改变一些符号的字体。 例如，为了表示一些常规集合，她使用黑板字体。
 \begin{parexammar}{.4\textandmarginlen}{

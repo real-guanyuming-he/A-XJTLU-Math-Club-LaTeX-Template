@@ -42,7 +42,7 @@
 %    \end{macrocode}
 
 % \begin{environment}{\newmdthmenv}
-% This environment is used to create thm environments using package mdframed.
+% This command is used to create thm environments using package mdframed.
 %    \begin{macrocode}
 \newcommand{\newmdthmenv}[3]{%
 % #1 caption
@@ -113,7 +113,7 @@ frametitle={%
 % Simplify writing FRactional DerivaTives (1 function 2 variable)\\
 %    \begin{macrocode}
 \newcommand{\frdt}[2][f]{\ensuremath{\frac{\mathrm{d}#1}{\mathrm{d}#2}}}
-\newcommand{\frpdt}[2][f]{\ensuremath{\frac{\grad #1}{\grad #2}}}
+\newcommand{\frpdt}[2][f]{\ensuremath{\frac{\partial #1}{\partial #2}}}
 %    \end{macrocode}
 
 % Infinite series (1: sequence 2: subscript 3: starting count)
@@ -146,11 +146,38 @@ frametitle={%
 \renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
 %    \end{macrocode}
 
-% operators
+% Operators
 %    \begin{macrocode}
 \DeclareMathOperator{\Nul}{Nul}
 \DeclareMathOperator{\Span}{Span}
 %    \end{macrocode}
+
+% Delimiters
+% \begin{macro}{\DefineDelimiters}
+% 1: new delimiters name 2: left delimiter 3: right delimiter
+%
+% inner 1: delimiter resizer (default to be left right); inner 2: expression being enclosed
+%    \begin{macrocode}
+\newcommand{\DefineDelimiters}[3]{%
+\expandafter\newcommand\csname#1\endcsname[2][]{%
+\ifx$##1$% ##1 is empty
+\ensuremath{\left#2 ##2 \right#3}%
+\else% ##1 is non-empty
+\ensuremath{##1#2 ##2 ##1#3}%
+\fi%
+}%
+}
+
+\DefineDelimiters{rbra}{(}{)}
+\DefineDelimiters{sbra}{[}{]}
+\DefineDelimiters{cbra}{\{}{\}}
+
+\DefineDelimiters{abs}{|}{|}
+
+\DefineDelimiters{ceiling}{\lceil}{\rceil}
+\DefineDelimiters{floor}{\lfloor}{\rfloor}
+%    \end{macrocode}
+% \end{macro}
 
 % Miscellaneous
 %    \begin{macrocode}
